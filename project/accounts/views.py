@@ -109,4 +109,3 @@ def ListFoodDonation(request):
 
         # order=Order(dish=dish, qty=qty, rest=rest)
         return JsonResponse({"success": True})
-
