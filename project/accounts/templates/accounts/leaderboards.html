@@ -1,0 +1,208 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<main class="bg-gray-50 pt-32 pb-20">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    
+    <!-- Header -->
+    <div class="text-center mb-12 reveal-on-scroll">
+      <h1 class="text-5xl font-extrabold text-gray-800">Community Leaderboards</h1>
+      <p class="text-lg text-gray-600 mt-2 max-w-2xl mx-auto">
+        Celebrating the incredible impact of our restaurant and NGO partners.
+      </p>
+    </div>
+
+    <!-- Tabs for Monthly / All-Time -->
+    <div class="mb-8 max-w-md mx-auto reveal-on-scroll">
+      <div class="flex p-1 bg-gray-200 rounded-full" id="tabs">
+        <button data-tab="monthly" class="tab-button flex-1 py-2 px-4 text-sm font-bold text-gray-800 rounded-full bg-white shadow-md">
+          {{ current_month_name }} Leaders
+        </button>
+        <button data-tab="all-time" class="tab-button flex-1 py-2 px-4 text-sm font-bold text-gray-500 rounded-full">
+          All-Time Champions
+        </button>
+      </div>
+    </div>
+
+    <!-- Tab Content -->
+    <div>
+      <!-- Monthly Leaders Content -->
+      <div id="monthly-content" class="tab-content">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          <!-- Top Restaurants (Monthly) -->
+          <div class="bg-white p-6 rounded-2xl shadow-lg reveal-on-scroll">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+              <i data-lucide="leaf" class="w-7 h-7 text-green-600"></i>
+              Top Restaurants (kg food saved)
+            </h2>
+            <ol class="space-y-4">
+              {% for restaurant in top_restaurants_monthly %}
+              <li class="flex items-center justify-between p-3 rounded-xl {% if forloop.counter == 1 %}bg-amber-100 border-l-4 border-amber-400{% elif forloop.counter == 2 %}bg-gray-100 border-l-4 border-gray-400{% elif forloop.counter == 3 %}bg-yellow-100 border-l-4 border-yellow-500{% else %}bg-gray-50{% endif %}">
+                <div class="flex items-center gap-4">
+                  <span class="font-bold text-lg text-gray-500 w-8 text-center">
+                    {% if forloop.counter == 1 %}<i data-lucide="trophy" class="w-6 h-6 text-amber-500 mx-auto"></i>
+                    {% elif forloop.counter == 2 %}<i data-lucide="award" class="w-6 h-6 text-gray-500 mx-auto"></i>
+                    {% elif forloop.counter == 3 %}<i data-lucide="medal" class="w-6 h-6 text-yellow-600 mx-auto"></i>
+                    {% else %}{{ forloop.counter }}
+                    {% endif %}
+                  </span>
+                  <span class="font-semibold text-gray-800">{{ restaurant.rest__name }}</span>
+                </div>
+                <span class="font-extrabold text-green-700 text-lg">{{ restaurant.kg_saved|floatformat:1 }} kg</span>
+              </li>
+              {% empty %}
+                <p class="text-gray-500 p-3">No donations recorded this month yet.</p>
+              {% endfor %}
+            </ol>
+          </div>
+
+          <!-- Top NGOs (Monthly) -->
+          <div class="bg-white p-6 rounded-2xl shadow-lg reveal-on-scroll" style="transition-delay: 200ms;">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+              <i data-lucide="utensils-crossed" class="w-7 h-7 text-blue-600"></i>
+              Top NGOs (meals served)
+            </h2>
+            <ol class="space-y-4">
+              {% for ngo in top_ngos_monthly %}
+              <li class="flex items-center justify-between p-3 rounded-xl {% if forloop.counter == 1 %}bg-amber-100 border-l-4 border-amber-400{% elif forloop.counter == 2 %}bg-gray-100 border-l-4 border-gray-400{% elif forloop.counter == 3 %}bg-yellow-100 border-l-4 border-yellow-500{% else %}bg-gray-50{% endif %}">
+                <div class="flex items-center gap-4">
+                   <span class="font-bold text-lg text-gray-500 w-8 text-center">
+                    {% if forloop.counter == 1 %}<i data-lucide="trophy" class="w-6 h-6 text-amber-500 mx-auto"></i>
+                    {% elif forloop.counter == 2 %}<i data-lucide="award" class="w-6 h-6 text-gray-500 mx-auto"></i>
+                    {% elif forloop.counter == 3 %}<i data-lucide="medal" class="w-6 h-6 text-yellow-600 mx-auto"></i>
+                    {% else %}{{ forloop.counter }}
+                    {% endif %}
+                  </span>
+                  <span class="font-semibold text-gray-800">{{ ngo.claimed_ngo__name }}</span>
+                </div>
+                <span class="font-extrabold text-blue-700 text-lg">{{ ngo.total_meals }} meals</span>
+              </li>
+              {% empty %}
+                <p class="text-gray-500 p-3">No pickups recorded this month yet.</p>
+              {% endfor %}
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- All-Time Leaders Content -->
+      <div id="all-time-content" class="tab-content hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          <!-- Top Restaurants (All Time) -->
+          <div class="bg-white p-6 rounded-2xl shadow-lg">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+              <i data-lucide="leaf" class="w-7 h-7 text-green-600"></i>
+              Top Restaurants (kg food saved)
+            </h2>
+            <ol class="space-y-4">
+              {% for restaurant in top_restaurants_all_time %}
+               <li class="flex items-center justify-between p-3 rounded-xl {% if forloop.counter == 1 %}bg-amber-100 border-l-4 border-amber-400{% elif forloop.counter == 2 %}bg-gray-100 border-l-4 border-gray-400{% elif forloop.counter == 3 %}bg-yellow-100 border-l-4 border-yellow-500{% else %}bg-gray-50{% endif %}">
+                <div class="flex items-center gap-4">
+                  <span class="font-bold text-lg text-gray-500 w-8 text-center">
+                    {% if forloop.counter == 1 %}<i data-lucide="trophy" class="w-6 h-6 text-amber-500 mx-auto"></i>
+                    {% elif forloop.counter == 2 %}<i data-lucide="award" class="w-6 h-6 text-gray-500 mx-auto"></i>
+                    {% elif forloop.counter == 3 %}<i data-lucide="medal" class="w-6 h-6 text-yellow-600 mx-auto"></i>
+                    {% else %}{{ forloop.counter }}
+                    {% endif %}
+                  </span>
+                  <span class="font-semibold text-gray-800">{{ restaurant.rest__name }}</span>
+                </div>
+                <span class="font-extrabold text-green-700 text-lg">{{ restaurant.kg_saved|floatformat:1 }} kg</span>
+              </li>
+              {% empty %}
+                <p class="text-gray-500 p-3">No completed donations yet!</p>
+              {% endfor %}
+            </ol>
+          </div>
+
+          <!-- Top NGOs (All Time) -->
+          <div class="bg-white p-6 rounded-2xl shadow-lg">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+              <i data-lucide="utensils-crossed" class="w-7 h-7 text-blue-600"></i>
+              Top NGOs (meals served)
+            </h2>
+            <ol class="space-y-4">
+              {% for ngo in top_ngos_all_time %}
+              <li class="flex items-center justify-between p-3 rounded-xl {% if forloop.counter == 1 %}bg-amber-100 border-l-4 border-amber-400{% elif forloop.counter == 2 %}bg-gray-100 border-l-4 border-gray-400{% elif forloop.counter == 3 %}bg-yellow-100 border-l-4 border-yellow-500{% else %}bg-gray-50{% endif %}">
+                <div class="flex items-center gap-4">
+                  <span class="font-bold text-lg text-gray-500 w-8 text-center">
+                    {% if forloop.counter == 1 %}<i data-lucide="trophy" class="w-6 h-6 text-amber-500 mx-auto"></i>
+                    {% elif forloop.counter == 2 %}<i data-lucide="award" class="w-6 h-6 text-gray-500 mx-auto"></i>
+                    {% elif forloop.counter == 3 %}<i data-lucide="medal" class="w-6 h-6 text-yellow-600 mx-auto"></i>
+                    {% else %}{{ forloop.counter }}
+                    {% endif %}
+                  </span>
+                  <span class="font-semibold text-gray-800">{{ ngo.claimed_ngo__name }}</span>
+                </div>
+                <span class="font-extrabold text-blue-700 text-lg">{{ ngo.total_meals }} meals</span>
+              </li>
+              {% empty %}
+                <p class="text-gray-500 p-3">No completed pickups yet!</p>
+              {% endfor %}
+            </ol>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // We need to re-run this for any new icons on the page
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+
+    const tabs = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Deactivate all tabs styles
+        tabs.forEach(item => {
+          item.classList.remove('bg-white', 'shadow-md', 'text-gray-800');
+          item.classList.add('text-gray-500');
+        });
+        
+        // Activate the clicked tab
+        tab.classList.add('bg-white', 'shadow-md', 'text-gray-800');
+        tab.classList.remove('text-gray-500');
+        
+        // Hide all content blocks
+        tabContents.forEach(content => {
+          content.classList.add('hidden');
+        });
+        
+        // Show the content block corresponding to the clicked tab
+        const contentId = tab.getAttribute('data-tab') + '-content';
+        document.getElementById(contentId).classList.remove('hidden');
+      });
+    });
+
+    // --- Scroll Reveal Animation Logic (from your main.html) ---
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    revealElements.forEach(el => {
+        revealObserver.observe(el);
+    });
+
+  });
+</script>
+{% endblock scripts %}

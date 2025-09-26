@@ -11,4 +11,5 @@ urlpatterns = [
     path("claim_food/<int:pk>/", views.ClaimFoodView, name="claim_food"),
     path("picked_food/<int:pk>/", views.PickedFoodView, name="picked_food"),
     path("dlt_food/<int:pk>/", views.DltFoodView, name="dlt_food"),
+
 ]
