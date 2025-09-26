@@ -247,17 +247,14 @@
                 let typeSpeed = 150;
 
                 if (isDeleting) {
-                    // Handle deleting
                     typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
                     charIndex--;
-                    typeSpeed = 75; // Faster when deleting
+                    typeSpeed = 75;
                 } else {
-                    // Handle typing
                     typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
                     charIndex++;
                 }
 
-                // Check for state change
                 if (!isDeleting && charIndex === currentWord.length) {
                     // Word fully typed
                     isDeleting = true;
