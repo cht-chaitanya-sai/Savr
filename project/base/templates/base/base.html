@@ -31,6 +31,29 @@
         transform: scale(1.25);
       }
 
+      @keyframes underglow {
+        0%, 100% {
+          box-shadow: 0 0 8px var(--glow-color-1), 0 0 16px var(--glow-color-2), 0 0 24px var(--glow-color-3);
+        }
+        50% {
+          box-shadow: 0 0 16px var(--glow-color-1), 0 0 32px var(--glow-color-2), 0 0 48px var(--glow-color-3);
+        }
+      }
+
+      .glow-green {
+        --glow-color-1: rgba(16, 185, 129, 0.5);  /* Tailwind green-500 */
+        --glow-color-2: rgba(52, 211, 153, 0.3);  /* Tailwind green-400 */
+        --glow-color-3: rgba(110, 231, 183, 0.2); /* Tailwind green-300 */
+        animation: underglow 3s ease-in-out infinite;
+      }
+
+      .glow-orange {
+        --glow-color-1: rgba(245, 158, 11, 0.5);  /* Tailwind amber-500 */
+        --glow-color-2: rgba(251, 191, 36, 0.3);  /* Tailwind amber-400 */
+        --glow-color-3: rgba(252, 211, 77, 0.2);  /* Tailwind amber-300 */
+        animation: underglow 3s ease-in-out infinite;
+      }
+
       .cta-button {
         transition: all 0.3s ease;
       }
