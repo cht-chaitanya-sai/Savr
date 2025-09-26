@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import NGO, Restaurant, CustomUser
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 
 class RestSignUpView(View):
@@ -96,3 +96,8 @@ class DashboardView(LoginRequiredMixin, View):
 def logoutView(request):
     logout(request)
     return redirect("main_page")
+
+
+def ListFoodDonation(request):
+    if request.method=="POST":
+        return 
