@@ -277,10 +277,11 @@
                 alertElement.classList.remove('hidden');
                 setTimeout(() => {
                     alertElement.classList.add('hidden');
-                }, 5000);
+                }, 5000); // Hide after 5 seconds
             }
         }
 
+        // --- Modal Logic ---
         const addDonationButton = document.getElementById('add-donation-button');
         const addDonationModal = document.getElementById('add-donation-modal');
         const modalContent = document.getElementById('modal-content');
@@ -327,6 +328,7 @@
             });
         }
 
+        // --- Form Submission Logic ---
         function sendPostRequestXHR(url, data, callback) {
             const xhr = new XMLHttpRequest();
             xhr.open('POST', url, true);
@@ -375,7 +377,6 @@
                         showAlert('error');
                     } else {
                         showAlert('success');
-                        closeModal();
                         donationForm.reset(); // Reset form fields
                         // Optionally, you might want to reload part of the page here
                     }
