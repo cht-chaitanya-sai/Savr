@@ -269,10 +269,8 @@
                   {{ donation.dish }}
                 </h3>
                 <p class="text-sm text-gray-600 mt-1">
-                  <span class="font-semibold">Quantity:</span> {{ donation.qty
-                  }}<br />
-                  <span class="font-semibold">Pickup by:</span> {{
-                  donation.pickup_datetime }}
+                  <span class="font-semibold">Quantity:</span> {{ donation.qty }}<br />
+                  <span class="font-semibold">Pickup by:</span> {{ donation.pickup_datetime }}
                 </p>
               </div>
               <div
@@ -312,8 +310,7 @@
                   {{ order.dish }} (Serves {{ order.qty }})
                 </h3>
                 <p class="text-sm text-gray-600 mt-1">
-                  <span class="font-semibold">Pickup by:</span> {{
-                  order.pickup_datetime }}
+                  <span class="font-semibold">Pickup by:</span> {{ order.pickup_datetime }}
                 </p>
               </div>
               <div class="flex items-center gap-2 mt-2 sm:mt-0 flex-shrink-0">
