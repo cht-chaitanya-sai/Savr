@@ -108,5 +108,4 @@ def ListFoodDonation(request):
         rest = request.user.rest
         print(dish, qty, pickup_datetime, rest)
 
-        # order=Order(dish=dish, qty=qty, rest=rest)
         return JsonResponse({"success": True})
