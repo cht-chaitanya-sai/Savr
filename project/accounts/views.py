@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.shortcuts import redirect
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -29,7 +30,8 @@ class RestSignUpView(View):
         if password1 == password2:
             passwd = True
         else:
-            return HttpResponse("Error")
+            messages.error(request, "Password and Confirm Password do not match")
+            return redirect("restaurant_signup")
 
         rest = Restaurant(
             name=name, location=location, email=email, phone=phone, fssai=fssai
@@ -178,6 +180,9 @@ def UpdateFoodDonation(request):
         pickup_datetime = datetime.strptime(pickup_datetime, "%Y-%m-%dT%H:%M")
 
         order = Orders.objects.get(id=editing_id)
+        if order.rest != request.user.rest:
+            return HttpResponseForbidden("You cannot edit other users' order")
+
         order.dish = dish
         order.qty = qty
         order.pickup_datetime = pickup_datetime
@@ -213,4 +218,3 @@ def DltFoodView(request, pk):
 
     order.delete()
     return redirect("dashboard")
-
