@@ -66,24 +66,35 @@
       <div
         class="container mx-auto px-6 py-4 flex justify-between items-center"
       >
-        <a href="#" class="text-3xl font-extrabold text-green-600">Savr.</a>
+        <a
+          href="{% url 'main_page' %}"
+          class="text-3xl font-extrabold text-green-600"
+          >Savr.</a
+        >
         <nav class="hidden md:flex items-center space-x-8">
           <a
-            href="#how-it-works"
+            href="{% url 'main_page' %}#how-it-works"
             class="text-gray-600 hover:text-green-600 transition-colors"
             >How It Works</a
           >
           <a
-            href="#impact"
+            href="{% url 'main_page' %}#impact"
             class="text-gray-600 hover:text-green-600 transition-colors"
             >Our Impact</a
           >
           <a
-            href="#testimonials"
+            href="{% url 'main_page' %}#testimonials"
             class="text-gray-600 hover:text-green-600 transition-colors"
             >Testimonials</a
           >
         </nav>
+        {% if request.user %}
+        <a
+          href="{% url 'restaurant_signup' %}"
+          class="bg-green-600 text-white font-bold py-2 px-5 rounded-full hover:bg-green-700 transition-transform hover:scale-105"
+          >Profile pic</a
+        >
+        {% else %}
         <div class="flex items-center space-x-4">
           <a
             href="{% url 'login' %}"
@@ -95,6 +106,7 @@
             class="bg-green-600 text-white font-bold py-2 px-5 rounded-full hover:bg-green-700 transition-transform hover:scale-105"
             >Sign Up</a
           >
+          {% endif %}
         </div>
       </div>
     </header>
