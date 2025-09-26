@@ -5,6 +5,9 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {% if request.user.type == "Rest" %}
+        <!-- =================================================================== -->
+        <!-- =================== RESTAURANT DASHBOARD VIEW =================== -->
+        <!-- =================================================================== -->
         <div class="mb-8">
             <h1 class="text-4xl font-extrabold text-gray-800">Welcome back, {{ request.user.rest.name }}!</h1>
             <p class="text-lg text-gray-600 mt-2">Here's a summary of your donation activity. It's Friday evening—thank you for helping reduce weekend food waste!</p>
@@ -13,11 +16,12 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2 space-y-8">
                 <div>
-                     <a href="#" class="w-full sm:w-auto flex items-center justify-center text-lg gap-3 bg-green-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:bg-green-700 transition-all duration-300 transform hover:-translate-y-1">
+                     <a href="#" id="add-donation-button" class="w-full sm:w-auto flex items-center justify-center text-lg gap-3 bg-green-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:bg-green-700 transition-all duration-300 transform hover:-translate-y-1">
                         <i data-lucide="plus-circle" class="w-6 h-6"></i>
                         Add New Food Donation
                     </a>
                 </div>
+                <!-- ... existing active and past donations sections ... -->
                 <div class="bg-white p-6 rounded-xl shadow-md">
                     <h2 class="text-2xl font-bold text-gray-800 mb-4">Active Donations</h2>
                     <div class="space-y-4">
@@ -79,6 +83,7 @@
                 </div>
             </div>
             <div class="lg:col-span-1 space-y-6">
+                 <!-- ... existing impact stats ... -->
                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100">
                          <i data-lucide="heart-handshake" class="h-8 w-8 text-green-600"></i>
@@ -104,7 +109,10 @@
         </div>
 
         {% elif request.user.type == "NGO" %}
-
+        <!-- =================================================================== -->
+        <!-- ======================= NGO DASHBOARD VIEW ======================== -->
+        <!-- =================================================================== -->
+        <!-- ... existing NGO dashboard code ... -->
         <div class="mb-8">
             <h1 class="text-4xl font-extrabold text-gray-800">Welcome, {{ request.user.ngo.name }}!</h1>
             <p class="text-lg text-gray-600 mt-2">There are fresh food donations available near you. Thank you for your incredible work.</p>
@@ -195,12 +203,94 @@
 
     </div>
 </main>
+
+<!-- Add Donation Modal -->
+<div id="add-donation-modal" class="fixed inset-0 bg-gray-900 bg-opacity-60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 transition-opacity duration-300">
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Add a New Donation</h2>
+            <button id="close-modal-button" class="text-gray-400 hover:text-gray-800 transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <form action="#" method="POST">
+            {% csrf_token %}
+            <div class="space-y-4">
+                <div>
+                    <label for="food-name" class="block text-sm font-medium text-gray-700">Food Name</label>
+                    <input id="food-name" name="food-name" type="text" required placeholder="e.g., Vegetable Biryani, Dal Makhani" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
+                    <input id="quantity" name="quantity" type="text" required placeholder="e.g., Serves 15-20" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="pickup-time" class="block text-sm font-medium text-gray-700">Pickup By (Time)</label>
+                    <input id="pickup-time" name="pickup-time" type="text" required value="11:00 PM" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                    <p class="mt-1 text-xs text-gray-500">Please provide a final pickup time for tonight.</p>
+                </div>
+                <div class="flex justify-end gap-4 pt-4">
+                    <button type="button" id="cancel-modal-button" class="px-6 py-2 rounded-lg text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors">Cancel</button>
+                    <button type="submit" class="px-6 py-2 rounded-lg text-sm font-semibold text-white bg-green-600 hover:bg-green-700 transition-colors">List Donation</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         lucide.createIcons();
+
+        // --- Modal Logic ---
+        const addDonationButton = document.getElementById('add-donation-button');
+        const addDonationModal = document.getElementById('add-donation-modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModalButton = document.getElementById('close-modal-button');
+        const cancelModalButton = document.getElementById('cancel-modal-button');
+
+        const openModal = () => {
+            if (addDonationModal) {
+                addDonationModal.classList.remove('hidden');
+                // Triggering reflow for transition
+                setTimeout(() => {
+                    addDonationModal.classList.add('opacity-100');
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                }, 10);
+            }
+        };
+
+        const closeModal = () => {
+            if (addDonationModal) {
+                addDonationModal.classList.remove('opacity-100');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    addDonationModal.classList.add('hidden');
+                }, 300); // Wait for transition to finish
+            }
+        };
+
+        if (addDonationButton) {
+            addDonationButton.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default anchor behavior
+                openModal();
+            });
+        }
+
+        if (closeModalButton) closeModalButton.addEventListener('click', closeModal);
+        if (cancelModalButton) cancelModalButton.addEventListener('click', closeModal);
+
+        // Close modal if clicking on the background
+        if (addDonationModal) {
+            addDonationModal.addEventListener('click', (event) => {
+                if (event.target === addDonationModal) {
+                    closeModal();
+                }
+            });
+        }
     });
 </script>
 {% endblock scripts %}
+
