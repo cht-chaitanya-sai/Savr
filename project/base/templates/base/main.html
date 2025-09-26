@@ -176,15 +176,14 @@
             }
 
             function startInterval() {
-                // Only start interval if not already running
                 if (!intervalId) {
-                    intervalId = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+                    intervalId = setInterval(nextSlide, 5000);
                 }
             }
 
             function resetInterval() {
                 clearInterval(intervalId);
-                intervalId = null; // Clear the interval ID
+                intervalId = null;
                 startInterval();
             }
 
