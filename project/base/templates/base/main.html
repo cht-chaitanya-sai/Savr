@@ -234,7 +234,6 @@
             revealObserver.observe(el);
         });
 
-        // --- REVISED: Typewriter Effect Logic ---
         const typewriterElement = document.getElementById('typewriter-text');
         const cursorElement = document.getElementById('cursor');
 
@@ -245,7 +244,7 @@
 
             function type() {
                 const currentWord = wordToType;
-                let typeSpeed = 150; // Standard typing speed
+                let typeSpeed = 150;
 
                 if (isDeleting) {
                     // Handle deleting
