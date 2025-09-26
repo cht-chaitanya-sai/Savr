@@ -256,19 +256,16 @@
                 }
 
                 if (!isDeleting && charIndex === currentWord.length) {
-                    // Word fully typed
                     isDeleting = true;
-                    typeSpeed = 2000; // Pause before deleting
+                    typeSpeed = 2000;
                 } else if (isDeleting && charIndex === 0) {
-                    // Word fully deleted
                     isDeleting = false;
-                    typeSpeed = 500; // Pause before re-typing
+                    typeSpeed = 500;
                 }
 
                 setTimeout(type, typeSpeed);
             }
 
-            // Start the effect after a brief delay
             setTimeout(type, 500);
         }
     });
