@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import NGO, Restaurant, CustomUser
 from django.http import HttpResponse
 
@@ -85,7 +86,7 @@ class LoginView(View):
             return HttpResponse("Error")
 
 
-class DashboardView(View):
+class DashboardView(LoginRequiredMixin, View):
     template = "accounts/dashboard.html"
 
     def get(self, request):
