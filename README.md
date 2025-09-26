@@ -43,6 +43,7 @@ Top restaurants (by kg saved)
 Top NGOs (by meals served)
 Can even be dummy seeded data for the hackathon demo.
 
+- Downloadable Donation Certificate (PDF) 📝
 ---
 
 ## 🚀 Tech Stack
