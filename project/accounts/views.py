@@ -101,6 +101,15 @@ class DashboardView(LoginRequiredMixin, View):
 
             donation_history=self.request.user.rest.orders_set.filter(status="Clcd")
             context['donation_history']=donation_history
+
+            no_of_meals_donated=self.request.user.rest.orders_set.filter(status="Clcd").count()
+            context['no_of_meals_donated']=no_of_meals_donated
+
+            no_of_donations_month=self.request.user.rest.orders_set.filter(status="Clcd", pickup_datetime__month=datetime.now().month).count()
+            context['no_of_donations_month']=no_of_donations_month
+
+            no_of_waste_reduced=self.request.user.rest.orders_set.filter(status="Clcd").count() * 10
+            context['no_of_waste_reduced']=no_of_waste_reduced
         elif request.user.type == "NGO":
             context = {}
             available_donations = Orders.objects.filter(status="Ld")
@@ -108,6 +117,16 @@ class DashboardView(LoginRequiredMixin, View):
 
             active_pickups=self.request.user.ngo.orders_set.filter(status="Clmd")
             context['active_pickups'] = active_pickups
+
+            no_of_meals_recieved=self.request.user.ngo.orders_set.filter(status="Clcd").count()
+            context['no_of_meals_recieved'] = no_of_meals_recieved
+
+            no_of_pickups_month=self.request.user.ngo.orders_set.filter(status="Clcd", pickup_datetime__month=datetime.now().month).count()
+            context['no_of_pickups_month']=no_of_pickups_month
+
+            no_of_rest = self.request.user.ngo.orders_set.filter(status="Clcd",).values('rest').distinct().count()
+            context['no_of_rest'] = no_of_rest 
+
         return render(request, self.template, context)
 
 
