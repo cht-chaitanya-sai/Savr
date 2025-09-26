@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import NGO, Restaurant, CustomUser
+from base.models import Orders
 from django.http import HttpResponse, JsonResponse
 from datetime import datetime
 
@@ -93,8 +94,9 @@ class DashboardView(LoginRequiredMixin, View):
     def get(self, request):
         context={}
         if request.user.type=="Rest":
-            active_donations=self.request.user.rest.orders_set.filter()
+            active_donations=self.request.user.rest.orders_set.all()
             context["active_donations"] = active_donations
+            print(active_donations)
         elif request.user.type=="ngo":
             context={}
         return render(request, self.template, context)
@@ -113,5 +115,7 @@ def ListFoodDonation(request):
         pickup_datetime = datetime.strptime(pickup_datetime, "%Y-%m-%dT%H:%M")
         rest = request.user.rest
 
-        # order=Order(dish=dish, qty=qty, rest=rest)
+        order=Orders(dish=dish, qty=qty, rest=rest, pickup_datetime=pickup_datetime)
+        order.save()
+
         return JsonResponse({"success": True})
