@@ -60,7 +60,7 @@ Can even be dummy seeded data for the hackathon demo.
 ## 📸 Screenshots  
 
 
-<img width="1613" height="610" alt="savr demo 1" src="https://github.com/user-attachments/assets/79a95022-0cde-456d-9c41-89fba83b6fa1" />
+<img width="1636" height="660" alt="image" src="https://github.com/user-attachments/assets/bf79e39b-ad52-41c1-a68e-6e3a0b77d684" />
 <img width="1878" height="1000" alt="savr demo 2" src="https://github.com/user-attachments/assets/82457c81-10df-47a5-9c52-57c279b20d0c" />
 <img width="1640" height="843" alt="savr demo 3" src="https://github.com/user-attachments/assets/dd41ec68-c266-45b2-848f-6f97c5dd49f4" />
 
