@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import Restaurant
+from accounts.models import Restaurant, NGO
 
 
 class Orders(models.Model):
@@ -12,3 +12,4 @@ class Orders(models.Model):
         ('Clmd', 'Claimed'),
         ('Clcd', 'Collected')
     ])
+    claimed_ngo=models.ForeignKey(NGO, on_delete=models.SET_NULL, blank=True, null=True)

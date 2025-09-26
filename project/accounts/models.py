@@ -10,6 +10,9 @@ class NGO(models.Model):
     ngoid = models.IntegerField()
     profile = models.ImageField(upload_to="ngo/", null=True, blank=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Restaurant(models.Model):
     name = models.CharField(max_length=100)
@@ -20,6 +23,9 @@ class Restaurant(models.Model):
     )
     fssai = models.IntegerField()
     profile = models.ImageField(upload_to="rest/", null=True, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class CustomUser(AbstractUser):
