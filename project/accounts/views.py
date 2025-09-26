@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.shortcuts import redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import NGO, Restaurant, CustomUser
 from django.http import HttpResponse
@@ -92,3 +92,7 @@ class DashboardView(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, self.template)
 
+
+def logoutView(request):
+    logout(request)
+    return redirect("main_page")
