@@ -32,7 +32,7 @@ class RestSignUpView(View):
         )
         rest.save()
 
-        user = CustomUser(username=email, email=email)
+        user = CustomUser(username=email, email=email, type="Rest", rest=rest)
         user.set_password(password1)
         user.save()
 
@@ -61,7 +61,7 @@ class NGOSignUpView(View):
         ngo = NGO(name=name, location=location, email=email, ngoid=ngoid)
         ngo.save()
 
-        user = CustomUser(username=email, email=email)
+        user = CustomUser(username=email, email=email, type="NGO", ngo=ngo)
         user.set_password(password1)
         user.save()
 
