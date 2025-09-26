@@ -3,7 +3,7 @@
 # Savr 🍽️💚
 ## Turn Surplus into Support.
 
-Savr is a web platform designed to bridge the gap between restaurants with surplus food and non-governmental organizations (NGOs) dedicated to feeding the hungry. Our mission is to reduce food waste and fight hunger by creating a simple, efficient, and reliable donation pipeline.
+**Savr** (pronounced *Savour*) is a web platform designed to bridge the gap between restaurants with surplus food and non-governmental organizations (NGOs) dedicated to feeding the hungry. Our mission is to reduce food waste and fight hunger by creating a simple, efficient, and reliable donation pipeline.
 
 <br>
 
