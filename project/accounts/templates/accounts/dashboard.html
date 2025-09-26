@@ -101,7 +101,6 @@
                 </div>
             </div>
             <div class="lg:col-span-1 space-y-6">
-                 <!-- ... existing impact stats ... -->
                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100">
                          <i data-lucide="heart-handshake" class="h-8 w-8 text-green-600"></i>
@@ -127,10 +126,7 @@
         </div>
 
         {% elif request.user.type == "NGO" %}
-        <!-- =================================================================== -->
-        <!-- ======================= NGO DASHBOARD VIEW ======================== -->
-        <!-- =================================================================== -->
-        <!-- ... existing NGO dashboard code ... -->
+
         <div class="mb-8">
             <h1 class="text-4xl font-extrabold text-gray-800">Welcome, {{ request.user.ngo.name }}!</h1>
             <p class="text-lg text-gray-600 mt-2">There are fresh food donations available near you. Thank you for your incredible work.</p>
