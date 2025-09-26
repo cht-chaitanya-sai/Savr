@@ -203,22 +203,29 @@
             // --- Profile Dropdown Logic ---
             const profileButton = document.getElementById('profile-menu-button');
             const profileDropdown = document.getElementById('profile-menu-dropdown');
-            const profileContainer = document.getElementById('profile-menu-container');
 
-            if (profileButton && profileDropdown && profileContainer) {
-                profileButton.addEventListener('click', () => {
+            if (profileButton && profileDropdown) {
+                profileButton.addEventListener('click', (event) => {
+                    // Stop this click from being caught by the window's listener
+                    event.stopPropagation();
+                    // Toggle the visibility of the dropdown
                     profileDropdown.classList.toggle('hidden');
                 });
 
-                // Close dropdown when clicking outside of the menu container
-                document.addEventListener('click', function(e) {
-                    if (!profileContainer.contains(e.target)) {
+                // Clicks inside the dropdown should NOT close the menu
+                profileDropdown.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                });
+
+                // Clicks anywhere else on the page should close the dropdown
+                window.addEventListener('click', () => {
+                    // If the dropdown is not hidden, hide it
+                    if (!profileDropdown.classList.contains('hidden')) {
                         profileDropdown.classList.add('hidden');
                     }
                 });
             }
 
-            // Other scripts from child templates can be added here
         });
     </script>
     {% endblock scripts %}
