@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views import View
 from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login
 from .models import NGO, Restaurant, CustomUser
-
+from django.http import HttpResponse
 
 # Create your views here.
 class RestSignUpView(View):
@@ -24,7 +25,7 @@ class RestSignUpView(View):
         if password1 == password2:
             passwd = True
         else:
-            return
+            return HttpResponse("Error")
 
         rest = Restaurant(
             name=name, location=location, email=email, phone=phone, fssai=fssai
@@ -55,7 +56,7 @@ class NGOSignUpView(View):
         if password1 == password2:
             passwd = True
         else:
-            return
+            return HttpResponse("Error")
 
         ngo = NGO(name=name, location=location, email=email, ngoid=ngoid)
         ngo.save()
@@ -73,3 +74,13 @@ class LoginView(View):
     def get(self, request):
         return render(request, self.template)
 
+
+    def post(self, request):
+        username=request.POST.get('email')
+        password=request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('main_page')
+        else:
+            return HttpResponse("Error")
