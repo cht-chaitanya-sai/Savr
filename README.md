@@ -20,31 +20,25 @@
 Savr is built with a focus on simplicity and impact.
 
 - Dual User Roles: Separate, tailored registration and login flows for Restaurants and NGOs.
-
 - Verification: Unique fields for user registration to ensure legitimacy (e.g., FSSAI License for restaurants, Registration ID for NGOs).
-
 - Modern Frontend: A clean, fully responsive, and engaging user interface built with Tailwind CSS.
-
-
 - Solid Foundation: A robust backend powered by the Django framework to ensure security and scalability.
 
 ## 🚀 Tech Stack
 
 - Backend: Django
-
 - Frontend: HTML5, CSS3, JavaScript (Vanilla)
 
-- Icons: Lucide Icons
 
-
-Push to the Branch (git push origin feature/AmazingFeature)
-
-Open a Pull Request
+## Features to Add
+- Show “Food Waste Reduced (kg)” converted into “CO₂ emissions saved” → ties into global SDG goals.
+- QR Pickup: generate a QR for each donation → NGO scans → marks complete.
 
 ## Credits
 
 ### Icons
 
+- Lucide Icons
 - https://www.vecteezy.com/png/20911740-user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon
 
 ## 📄 License
