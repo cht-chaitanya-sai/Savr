@@ -96,7 +96,6 @@ class DashboardView(LoginRequiredMixin, View):
         if request.user.type=="Rest":
             active_donations=self.request.user.rest.orders_set.filter(status__in=['Ld', 'Clmd'])
             context["active_donations"] = active_donations
-            print(context)
         elif request.user.type=="ngo":
             context={}
         return render(request, self.template, context)
