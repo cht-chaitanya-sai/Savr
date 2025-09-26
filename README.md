@@ -38,6 +38,11 @@ Our mission is simple yet impactful: **reduce food waste and fight hunger** by c
 - **QR-Based Pickup**  
   Each donation generates a unique QR code → scanned by NGOs to mark pickup completion.
 
+- Sustainability Scoreboard 🌍
+Top restaurants (by kg saved)
+Top NGOs (by meals served)
+Can even be dummy seeded data for the hackathon demo.
+
 ---
 
 ## 🚀 Tech Stack
