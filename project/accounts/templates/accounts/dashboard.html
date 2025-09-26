@@ -267,7 +267,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         lucide.createIcons();
 
-        // --- Alert Logic ---
         const successAlert = document.getElementById('success-alert');
         const errorAlert = document.getElementById('error-alert');
 
@@ -358,7 +357,7 @@
                 const pickup_time = document.getElementById('pickup-time').value;
 
                 if (!dish || !quantity || !pickup_time) {
-                    showAlert('error'); // Show error if fields are empty
+                    showAlert('error');
                     return;
                 }
 
@@ -375,15 +374,12 @@
                         showAlert('error');
                     } else {
                         showAlert('success');
-                        closeModal();
-                        donationForm.reset(); // Reset form fields
-                        // Optionally, you might want to reload part of the page here
+                        donationForm.reset();
                     }
                 });
             });
         }
 
-        // --- Set default pickup time ---
         const pickupTimeInput = document.getElementById('pickup-time');
         if (pickupTimeInput) {
             const now = new Date();
