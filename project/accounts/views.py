@@ -14,3 +14,9 @@ class NGOSignUpView(View):
 
     def get(self, request):
         return render(request, self.template)
+
+class LoginView(View):
+    template="accounts/login.html"
+
+    def get(self, request):
+        return render(request, self.template)
