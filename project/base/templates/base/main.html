@@ -210,7 +210,6 @@
             updateCount();
         };
 
-        // --- Scroll Reveal Animation Logic ---
         const revealElements = document.querySelectorAll('.reveal-on-scroll');
 
         const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -224,7 +223,6 @@
                         counter.dataset.animated = 'true';
                     }
 
-                    // Unobserve after animation to save resources
                     observer.unobserve(entry.target);
                 }
             });
