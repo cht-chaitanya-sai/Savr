@@ -17,24 +17,20 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-      /* Custom styles to complement Tailwind */
       body {
         font-family: "Inter", sans-serif;
         background-color: #f8f9fa; /* A very light grey background for a soft feel */
       }
 
-      /* Custom gradient for the hero section */
       .hero-gradient {
         background: linear-gradient(135deg, #fffae6 0%, #f0fff0 100%);
       }
 
-      /* Style for the active testimonial dot */
       .dot.active {
         background-color: #f59e0b; /* Amber-500 */
         transform: scale(1.25);
       }
 
-      /* Subtle animation for hero section buttons */
       .cta-button {
         transition: all 0.3s ease;
       }
@@ -43,7 +39,6 @@
         box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
       }
 
-      /* Fade-in animation for elements on scroll */
       .reveal-on-scroll {
         opacity: 0;
         transform: translateY(30px);
@@ -91,11 +86,9 @@
 
         <div class="flex items-center space-x-4">
             {% if request.user.is_authenticated %}
-            <!-- Profile dropdown for logged-in users -->
             <div class="relative" id="profile-menu-container">
                 <button id="profile-menu-button" class="flex text-sm bg-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                     <span class="sr-only">Open user menu</span>
-                    <!-- Profile picture placeholder -->
                     <div class="h-9 w-9 rounded-full bg-green-600 flex items-center justify-center text-white font-bold text-sm">
                         {{ request.user.username|first|upper }}
                     </div>
@@ -195,10 +188,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Initialize Lucide Icons ---
             lucide.createIcons();
 
-            // --- Profile Dropdown Logic ---
             const profileButton = document.getElementById('profile-menu-button');
             const profileDropdown = document.getElementById('profile-menu-dropdown');
             const profileContainer = document.getElementById('profile-menu-container');
@@ -209,7 +200,6 @@
                     profileDropdown.classList.toggle('hidden');
                 });
 
-                // This closes the dropdown if a click is detected outside of its container
                 window.addEventListener('click', function(e) {
                     if (!profileContainer.contains(e.target)) {
                         profileDropdown.classList.add('hidden');
