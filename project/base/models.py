@@ -6,8 +6,7 @@ class Orders(models.Model):
     dish=models.CharField(max_length=100)
     qty=models.IntegerField()
     rest=models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    pickup_time=models.TimeField()
-    pickup_date=models.DateField()
+    pickup_datetime=models.DateTimeField()
     status=models.CharField(choices=[
         ('Ld', 'Listed'),
         ('Clmd', 'Claimed'),

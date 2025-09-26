@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import NGO, Restaurant, CustomUser
 from django.http import HttpResponse, JsonResponse
+from datetime import datetime
 
 
 class RestSignUpView(View):
@@ -100,4 +101,12 @@ def logoutView(request):
 
 def ListFoodDonation(request):
     if request.method=="POST":
-        return 
+        dish=request.POST.get("dish")
+        qty=request.POST.get("quantity")
+        pickup_datetime=request.POST.get('pickup_time')
+        pickup_datetime=datetime.strptime(pickup_datetime, "%Y-%m-%dT%H:%M")
+        rest=request.user.rest
+        print(dish, qty, pickup_datetime, rest)
+
+        # order=Order(dish=dish, qty=qty, rest=rest)
+        return JsonResponse({'success': True})
