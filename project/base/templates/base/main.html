@@ -128,15 +128,13 @@
 
 {% block scripts %}
 <script>
-    // This script assumes Lucide Icons is loaded in your base.html
-    // If not, you'll need to include its script tag there.
+
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }
 
     document.addEventListener('DOMContentLoaded', function() {
 
-        // --- Testimonial Slider Logic ---
         const slider = document.getElementById('testimonial-slider');
         const dotsContainer = document.getElementById('testimonial-dots');
         if (slider && dotsContainer) {
@@ -145,10 +143,8 @@
             let currentIndex = 0;
             let intervalId;
 
-            // Clear existing dots before creating new ones to prevent duplication on page reloads (e.g., with Turbo)
             dotsContainer.innerHTML = '';
 
-            // Create dots
             for (let i = 0; i < slideCount; i++) {
                 const dot = document.createElement('button');
                 dot.classList.add('dot', 'w-3', 'h-3', 'bg-gray-300', 'rounded-full', 'transition-all', 'duration-300');
