@@ -39,7 +39,6 @@
                         Add New Food Donation
                     </a>
                 </div>
-                <!-- ... existing active and past donations sections ... -->
                 <div class="bg-white p-6 rounded-xl shadow-md">
                     <h2 class="text-2xl font-bold text-gray-800 mb-4">Active Donations</h2>
                     <div class="space-y-4">
@@ -102,7 +101,6 @@
                 </div>
             </div>
             <div class="lg:col-span-1 space-y-6">
-                 <!-- ... existing impact stats ... -->
                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100">
                          <i data-lucide="heart-handshake" class="h-8 w-8 text-green-600"></i>
@@ -128,10 +126,7 @@
         </div>
 
         {% elif request.user.type == "NGO" %}
-        <!-- =================================================================== -->
-        <!-- ======================= NGO DASHBOARD VIEW ======================== -->
-        <!-- =================================================================== -->
-        <!-- ... existing NGO dashboard code ... -->
+
         <div class="mb-8">
             <h1 class="text-4xl font-extrabold text-gray-800">Welcome, {{ request.user.ngo.name }}!</h1>
             <p class="text-lg text-gray-600 mt-2">There are fresh food donations available near you. Thank you for your incredible work.</p>
@@ -176,7 +171,6 @@
                             </div>
                             <div class="flex items-center gap-2 mt-2 sm:mt-0 flex-shrink-0">
                                 <a href="{% url 'picked_food' order.id %}" class="text-sm text-white bg-amber-500 hover:bg-amber-600 rounded-md px-3 py-1">Mark as Completed</a>
-                                <!-- <a href="#" class="text-sm text-gray-600 hover:text-gray-900">View Details</a> -->
                             </div>
                         </div>
                         {% endfor %}
@@ -213,7 +207,6 @@
     </div>
 </main>
 
-<!-- Add Donation Modal -->
 <div id="add-donation-modal" class="fixed inset-0 bg-gray-900 bg-opacity-60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
     <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
         <div class="flex justify-between items-center mb-6">
