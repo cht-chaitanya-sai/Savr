@@ -162,3 +162,10 @@ def PickedFoodView(request, pk):
     order.save()
 
     return redirect("dashboard")
+
+
+def DltFoodView(request, pk):
+    order=Orders.objects.get(id=pk)
+    order.delete()
+
+    return redirect("dashboard")
