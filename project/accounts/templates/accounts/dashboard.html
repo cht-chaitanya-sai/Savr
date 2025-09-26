@@ -245,7 +245,6 @@
         const openModal = () => {
             if (addDonationModal) {
                 addDonationModal.classList.remove('hidden');
-                // Triggering reflow for transition
                 setTimeout(() => {
                     addDonationModal.classList.add('opacity-100');
                     modalContent.classList.remove('scale-95', 'opacity-0');
@@ -259,13 +258,13 @@
                 modalContent.classList.add('scale-95', 'opacity-0');
                 setTimeout(() => {
                     addDonationModal.classList.add('hidden');
-                }, 300); // Wait for transition to finish
+                }, 300);
             }
         };
 
         if (addDonationButton) {
             addDonationButton.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default anchor behavior
+                e.preventDefault();
                 openModal();
             });
         }
@@ -286,7 +285,6 @@
             const now = new Date();
             now.setHours(23, 0, 0, 0);
 
-            // Format to YYYY-MM-DDTHH:MM which is required for datetime-local
             const year = now.getFullYear();
             const month = (now.getMonth() + 1).toString().padStart(2, '0');
             const day = now.getDate().toString().padStart(2, '0');
