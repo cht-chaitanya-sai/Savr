@@ -7,4 +7,4 @@ class MainPageView(View):
     template = "base/main.html"
 
     def get(self, request):
-        return render(request, self.template, )
+        return render(request, self.template)
