@@ -103,7 +103,6 @@
                 </div>
             </div>
         </div>
-
         {% elif request.user.type == "NGO" %}
 
         <div class="mb-8">
@@ -214,7 +213,7 @@
                 </div>
                 <div>
                     <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
-                    <input id="quantity" name="quantity" type="text" required placeholder="e.g., Serves 15-20" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                    <input id="quantity" name="quantity" type="number" required placeholder="e.g., Serves 15-20" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
                 </div>
                 <div>
                     <label for="pickup-time" class="block text-sm font-medium text-gray-700">Pickup By (Date and Time)</label>
@@ -223,12 +222,61 @@
                 </div>
                 <div class="flex justify-end gap-4 pt-4">
                     <button type="button" id="cancel-modal-button" class="px-6 py-2 rounded-lg text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors">Cancel</button>
-                    <button type="submit" class="px-6 py-2 rounded-lg text-sm font-semibold text-white bg-green-600 hover:bg-green-700 transition-colors">List Donation</button>
+                    <button type="button" id="list-donation-button" class="px-6 py-2 rounded-lg text-sm font-semibold text-white bg-green-600 hover:bg-green-700 transition-colors">List Donation</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+
+
+<script>
+  function sendPostRequestXHR(url, data, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Or 'application/x-www-form-urlencoded'
+    xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+
+    let s = new URLSearchParams(Object.entries(data)).toString();
+
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        callback(null, xhr.responseText);
+      } else {
+        callback(new Error(`Request failed with status ${xhr.status}`), null);
+      }
+    };
+
+    xhr.onerror = function() {
+      callback(new Error('Network error'), null);
+    };
+
+    xhr.send(s); // Send data as JSON string
+  }
+
+  document.getElementById("list-donation-button").addEventListener("click", () => {
+    let csrf = document.querySelector("input[name='csrfmiddlewaretoken']").value;
+    const dish = document.getElementById('food-name').value;
+    const quantity = parseInt(document.getElementById('quantity').value);
+    const pickup_time = document.getElementById('pickup-time').value;
+
+    const postData = {
+      'dish': dish,
+      'quantity': quantity,
+      'pickup_time': pickup_time,
+    };
+
+    sendPostRequestXHR('/list_food_donation/', postData, (err, response) => {
+      if (err) {
+        console.error(err);
+      } else {
+        document.getElementById('food-name').value = ''
+        document.getElementById('quantity').value = 0
+      }
+    });
+  })
+
+</script>
 {% endblock %}
 
 {% block scripts %}
