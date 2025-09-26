@@ -243,6 +243,47 @@
             revealObserver.observe(el);
         });
 
+        // --- REVISED: Typewriter Effect Logic ---
+        const typewriterElement = document.getElementById('typewriter-text');
+        const cursorElement = document.getElementById('cursor');
+
+        if (typewriterElement && cursorElement) {
+            const wordToType = "Support.";
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                const currentWord = wordToType;
+                let typeSpeed = 150; // Standard typing speed
+
+                if (isDeleting) {
+                    // Handle deleting
+                    typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
+                    charIndex--;
+                    typeSpeed = 75; // Faster when deleting
+                } else {
+                    // Handle typing
+                    typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                // Check for state change
+                if (!isDeleting && charIndex === currentWord.length) {
+                    // Word fully typed
+                    isDeleting = true;
+                    typeSpeed = 2000; // Pause before deleting
+                } else if (isDeleting && charIndex === 0) {
+                    // Word fully deleted
+                    isDeleting = false;
+                    typeSpeed = 500; // Pause before re-typing
+                }
+
+                setTimeout(type, typeSpeed);
+            }
+
+            // Start the effect after a brief delay
+            setTimeout(type, 500);
+        }
     });
  </script>
 {% endblock scripts %}
