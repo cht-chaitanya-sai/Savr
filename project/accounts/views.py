@@ -84,3 +84,9 @@ class LoginView(View):
             return redirect('main_page')
         else:
             return HttpResponse("Error")
+
+class DashboardView(View):
+    template = "accounts/dashboard.html"
+
+    def get(self, request):
+        return render(request, self.template)

@@ -1,0 +1,145 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<main class="bg-gray-50 pt-24 pb-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        {% if request.user.type == "Rest" %}
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-extrabold text-gray-800">Welcome back, {{ request.user.rest.name }}!</h1>
+            <p class="text-lg text-gray-600 mt-2">Here's a summary of your donation activity. It's Friday evening—thank you for helping reduce weekend food waste!</p>
+        </div>
+
+
+        <!-- Main Grid Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Main Content: Donations -->
+            <div class="lg:col-span-2 space-y-8">
+
+                <!-- Quick Action -->
+                <div>
+                     <a href="#" class="w-full sm:w-auto flex items-center justify-center text-lg gap-3 bg-green-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:bg-green-700 transition-all duration-300 transform hover:-translate-y-1">
+                        <i data-lucide="plus-circle" class="w-6 h-6"></i>
+                        Add New Food Donation
+                    </a>
+                </div>
+
+                <!-- Active Donations -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Active Donations</h2>
+                    <div class="space-y-4">
+
+                        <!-- Donation Item 1 (Claimed) -->
+                        <div class="p-4 border rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-green-50 border-green-200">
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-900">Vegetable Biryani (Serves 15-20)</h3>
+                                <p class="text-sm text-gray-600">Pickup by: 10:30 PM Tonight</p>
+                            </div>
+                            <div class="text-sm text-center">
+                                <span class="font-semibold px-3 py-1 rounded-full bg-green-200 text-green-800">Claimed</span>
+                                <p class="text-gray-500 mt-1">by Feeding India</p>
+                            </div>
+                            <div class="flex items-center gap-2 mt-2 sm:mt-0">
+                                <button class="text-sm text-white bg-green-500 hover:bg-green-600 rounded-md px-3 py-1">Mark Picked Up</button>
+                            </div>
+                        </div>
+
+                        <!-- Donation Item 2 (Listed) -->
+                        <div class="p-4 border rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-900">Dal Makhani (5 Litres)</h3>
+                                <p class="text-sm text-gray-600">Pickup by: 11:00 PM Tonight</p>
+                            </div>
+                             <span class="font-semibold px-3 py-1 rounded-full bg-amber-100 text-amber-800">Listed</span>
+                            <div class="flex items-center gap-2 mt-2 sm:mt-0">
+                                <button class="text-sm text-gray-600 hover:text-gray-900"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
+                                <button class="text-sm text-red-600 hover:text-red-800"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Past Donations -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Donation History</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Food Item</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Claimed By</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">24 Sep 2025</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Paneer Butter Masala</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Roti Bank Foundation</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-green-700">Completed</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">22 Sep 2025</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Assorted Naan Breads</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Uday Foundation</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-green-700">Completed</td>
+                                </tr>
+                                <!-- More rows... -->
+                            </tbody>
+                        </table>
+                    </div>
+                     <a href="#" class="mt-4 inline-block text-sm font-medium text-green-600 hover:text-green-500">View all donation history &rarr;</a>
+                </div>
+
+            </div>
+
+            <!-- Sidebar: Impact Stats -->
+            <div class="lg:col-span-1 space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100">
+                         <i data-lucide="heart-handshake" class="h-8 w-8 text-green-600"></i>
+                    </div>
+                    <h3 class="mt-4 text-4xl font-extrabold text-green-600">1,280</h3>
+                    <p class="mt-1 text-lg font-medium text-gray-600">Total Meals Donated</p>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-amber-100">
+                         <i data-lucide="calendar" class="h-8 w-8 text-amber-600"></i>
+                    </div>
+                    <h3 class="mt-4 text-4xl font-extrabold text-amber-600">42</h3>
+                    <p class="mt-1 text-lg font-medium text-gray-600">Donations This Month</p>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                     <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-blue-100">
+                         <i data-lucide="recycle" class="h-8 w-8 text-blue-600"></i>
+                    </div>
+                    <h3 class="mt-4 text-4xl font-extrabold text-blue-600">~150 kg</h3>
+                    <p class="mt-1 text-lg font-medium text-gray-600">Food Waste Reduced</p>
+                </div>
+            </div>
+        </div>
+        {%elif request.user.type == "NGO"%}
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-extrabold text-gray-800">Welcome back, {{ requesut.user.ngo.name }}!</h1>
+            <p class="text-lg text-gray-600 mt-2">Here's a summary of your donation activity. It's Friday evening—thank you for helping reduce weekend food waste!</p>
+        </div>
+        {% endif %}
+
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Lucide Icons on this page
+        lucide.createIcons();
+    });
+</script>
+{% endblock scripts %}
+
