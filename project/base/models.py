@@ -7,3 +7,9 @@ class Orders(models.Model):
     qty=models.IntegerField()
     rest=models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     pickup_time=models.TimeField()
+    pickup_date=models.DateField()
+    status=models.CharField(choices=[
+        ('Ld', 'Listed'),
+        ('Clmd', 'Claimed'),
+        ('Clcd', 'Collected')
+    ])
