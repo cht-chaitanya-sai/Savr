@@ -8,6 +8,7 @@ Savr is a web platform designed to bridge the gap between restaurants with surpl
 <br>
 
 <img width="1880" height="698" alt="image" src="https://github.com/user-attachments/assets/eb44ef37-53bf-4ec9-9fb4-1457a98b10d5" />
+<img width="1878" height="1000" alt="image" src="https://github.com/user-attachments/assets/82457c81-10df-47a5-9c52-57c279b20d0c" />
 <img width="1883" height="784" alt="image" src="https://github.com/user-attachments/assets/0bfd0e12-63fd-4d16-9a2f-1b12a61ce5e6" />
 
 <br>
