@@ -92,12 +92,16 @@ class DashboardView(LoginRequiredMixin, View):
     template = "accounts/dashboard.html"
 
     def get(self, request):
-        context={}
-        if request.user.type=="Rest":
-            active_donations=self.request.user.rest.orders_set.filter(status__in=['Ld', 'Clmd'])
+        context = {}
+        if request.user.type == "Rest":
+            active_donations = self.request.user.rest.orders_set.filter(
+                status__in=["Ld", "Clmd"]
+            )
             context["active_donations"] = active_donations
-        elif request.user.type=="ngo":
-            context={}
+        elif request.user.type == "NGO":
+            context = {}
+            available_donations = Orders.objects.filter(status="Ld")
+            context["available_donations"] = available_donations
         return render(request, self.template, context)
 
 
@@ -114,7 +118,7 @@ def ListFoodDonation(request):
         pickup_datetime = datetime.strptime(pickup_datetime, "%Y-%m-%dT%H:%M")
         rest = request.user.rest
 
-        order=Orders(dish=dish, qty=qty, rest=rest, pickup_datetime=pickup_datetime)
+        order = Orders(dish=dish, qty=qty, rest=rest, pickup_datetime=pickup_datetime)
         order.save()
 
         return JsonResponse({"success": True})
