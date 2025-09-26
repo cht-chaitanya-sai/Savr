@@ -5,7 +5,9 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {% if request.user.type == "Rest" %}
-
+        <!-- =================================================================== -->
+        <!-- =================== RESTAURANT DASHBOARD VIEW =================== -->
+        <!-- =================================================================== -->
         <div class="mb-8">
             <h1 class="text-4xl font-extrabold text-gray-800">Welcome back, {{ request.user.rest.name }}!</h1>
             <p class="text-lg text-gray-600 mt-2">Here's a summary of your donation activity. It's Friday evening—thank you for helping reduce weekend food waste!</p>
@@ -107,7 +109,10 @@
         </div>
 
         {% elif request.user.type == "NGO" %}
-
+        <!-- =================================================================== -->
+        <!-- ======================= NGO DASHBOARD VIEW ======================== -->
+        <!-- =================================================================== -->
+        <!-- ... existing NGO dashboard code ... -->
         <div class="mb-8">
             <h1 class="text-4xl font-extrabold text-gray-800">Welcome, {{ request.user.ngo.name }}!</h1>
             <p class="text-lg text-gray-600 mt-2">There are fresh food donations available near you. Thank you for your incredible work.</p>
@@ -220,9 +225,9 @@
                     <input id="quantity" name="quantity" type="text" required placeholder="e.g., Serves 15-20" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
                 </div>
                 <div>
-                    <label for="pickup-time" class="block text-sm font-medium text-gray-700">Pickup By (Time)</label>
-                    <input id="pickup-time" name="pickup-time" type="text" required value="11:00 PM" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                    <p class="mt-1 text-xs text-gray-500">Please provide a final pickup time for tonight.</p>
+                    <label for="pickup-time" class="block text-sm font-medium text-gray-700">Pickup By (Date and Time)</label>
+                    <input id="pickup-time" name="pickup-time" type="datetime-local" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                    <p class="mt-1 text-xs text-gray-500">Select the final date and time for pickup.</p>
                 </div>
                 <div class="flex justify-end gap-4 pt-4">
                     <button type="button" id="cancel-modal-button" class="px-6 py-2 rounded-lg text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors">Cancel</button>
@@ -284,6 +289,24 @@
                     closeModal();
                 }
             });
+        }
+
+        // --- Set default pickup time ---
+        const pickupTimeInput = document.getElementById('pickup-time');
+        if (pickupTimeInput) {
+            const now = new Date();
+            // Set hours to 23 (11 PM) and minutes to 00
+            now.setHours(23, 0, 0, 0);
+
+            // Format to YYYY-MM-DDTHH:MM which is required for datetime-local
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const day = now.getDate().toString().padStart(2, '0');
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+
+            const defaultValue = `${year}-${month}-${day}T${hours}:${minutes}`;
+            pickupTimeInput.value = defaultValue;
         }
     });
 </script>
