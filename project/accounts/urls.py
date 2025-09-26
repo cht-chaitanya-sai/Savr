@@ -8,4 +8,6 @@ urlpatterns = [
     path("logout/", views.logoutView, name="logout"),
     path("dashboard/", views.DashboardView.as_view(), name="dashboard"),
     path("list_food_donation/", views.ListFoodDonation, name="list_food"),
+    path("claim_food/<int:pk>", views.ClaimFoodView, name="claim_food"),
+    path("picked_food/<int:pk>", views.PickedFoodView, name="picked_food"),
 ]

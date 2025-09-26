@@ -98,10 +98,16 @@ class DashboardView(LoginRequiredMixin, View):
                 status__in=["Ld", "Clmd"]
             )
             context["active_donations"] = active_donations
+
+            donation_history=self.request.user.rest.orders_set.filter(status="Clcd")
+            context['donation_history']=donation_history
         elif request.user.type == "NGO":
             context = {}
             available_donations = Orders.objects.filter(status="Ld")
             context["available_donations"] = available_donations
+
+            active_pickups=self.request.user.ngo.orders_set.filter(status="Clmd")
+            context['active_pickups'] = active_pickups
         return render(request, self.template, context)
 
 
@@ -122,3 +128,18 @@ def ListFoodDonation(request):
         order.save()
 
         return JsonResponse({"success": True})
+    
+def ClaimFoodView(request, pk):
+    order=Orders.objects.get(id=pk)
+    order.claimed_ngo=request.user.ngo
+    order.status="Clmd"
+    order.save()
+
+    return redirect("dashboard")
+
+def PickedFoodView(request, pk):
+    order=Orders.objects.get(id=pk)
+    order.status="Clcd"
+    order.save()
+
+    return redirect("dashboard")
