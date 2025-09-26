@@ -1,0 +1,53 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="min-h-screen hero-gradient flex flex-col justify-center items-center pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-lg w-full bg-white p-8 md:p-12 rounded-2xl shadow-lg space-y-6">
+        <div>
+            <h2 class="text-center text-3xl font-extrabold text-gray-900">
+                Register your <span class="text-amber-600">NGO</span> with Savr
+            </h2>
+            <p class="mt-2 text-center text-sm text-gray-600">
+                Get access to surplus food donations from restaurants near you.
+            </p>
+        </div>
+        <form class="space-y-4" action="#" method="POST">
+            {% csrf_token %}
+            <div>
+                <label for="ngo-name" class="block text-sm font-medium text-gray-700">NGO Name</label>
+                <input id="ngo-name" name="ngo-name" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+            </div>
+            <div>
+                <label for="address" class="block text-sm font-medium text-gray-700">Full Address</label>
+                <textarea id="address" name="address" rows="3" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"></textarea>
+            </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Contact Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+            </div>
+             <div>
+                <label for="reg-id" class="block text-sm font-medium text-gray-700">NGO Registration ID</label>
+                <input id="reg-id" name="reg-id" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                 <p class="mt-1 text-xs text-gray-500">e.g., Trust/Society Registration No., 12A, 80G.</p>
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input id="password" name="password" type="password" autocomplete="new-password" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+            </div>
+
+            <div>
+                <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+                    Register Your NGO
+                </button>
+            </div>
+        </form>
+        <div class="text-sm text-center">
+            <p class="text-gray-600">Already registered?
+                <a href="" class="font-medium text-green-600 hover:text-green-500">
+                    Sign In
+                </a>.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
