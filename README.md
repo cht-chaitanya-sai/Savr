@@ -39,5 +39,11 @@ Push to the Branch (git push origin feature/AmazingFeature)
 
 Open a Pull Request
 
+## Credits
+
+### Icons
+
+- https://www.vecteezy.com/png/20911740-user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon
+
 ## 📄 License
 This project is licensed under the GPLv3 License. See the LICENSE file for more details.
