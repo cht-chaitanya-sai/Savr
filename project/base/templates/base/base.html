@@ -31,6 +31,28 @@
         transform: scale(1.25);
       }
 
+      .cta-button {
+        transition: all 0.3s ease;
+      }
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
+      }
+
+      .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.8s ease-out,
+          transform 0.8s ease-out;
+      }
+
+      .reveal-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* --- UPDATED: More Intense Underglow Animation --- */
       @keyframes underglow {
         0%, 100% {
           box-shadow: 0 0 12px var(--glow-color-1), 0 0 24px var(--glow-color-2), 0 0 36px var(--glow-color-3);
@@ -54,26 +76,14 @@
         animation: underglow 3s ease-in-out infinite;
       }
 
-      .cta-button {
-        transition: all 0.3s ease;
+      /* --- NEW: Blinking Cursor for Typewriter --- */
+      @keyframes blink {
+        50% { opacity: 0; }
       }
-      .cta-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
-      }
-
-      .reveal-on-scroll {
-        opacity: 0;
-        transform: translateY(30px);
-        transition:
-          opacity 0.8s ease-out,
-          transform 0.8s ease-out;
+      .cursor {
+        animation: blink 1s step-end infinite;
       }
 
-      .reveal-on-scroll.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
     </style>
   </head>
 
@@ -265,3 +275,4 @@
     {% block scripts %} {% endblock scripts %}
   </body>
 </html>
+
