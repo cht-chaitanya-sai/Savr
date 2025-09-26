@@ -267,7 +267,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         lucide.createIcons();
 
-        // --- Alert Logic ---
         const successAlert = document.getElementById('success-alert');
         const errorAlert = document.getElementById('error-alert');
 
@@ -277,7 +276,7 @@
                 alertElement.classList.remove('hidden');
                 setTimeout(() => {
                     alertElement.classList.add('hidden');
-                }, 5000); // Hide after 5 seconds
+                }, 5000);
             }
         }
 
