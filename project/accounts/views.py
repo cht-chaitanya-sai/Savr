@@ -91,7 +91,13 @@ class DashboardView(LoginRequiredMixin, View):
     template = "accounts/dashboard.html"
 
     def get(self, request):
-        return render(request, self.template)
+        context={}
+        if request.user.type=="Rest":
+            active_donations=self.request.user.rest.orders_set.filter()
+            context["active_donations"] = active_donations
+        elif request.user.type=="ngo":
+            context={}
+        return render(request, self.template, context)
 
 
 def logoutView(request):
