@@ -27,5 +27,5 @@ class CustomUser(AbstractUser):
         ]
     )
 
-    ngo = models.ForeignKey(NGO, blank=True, null=True)
-    rest = models.ForeignKey(Restaurant, blank=True, null=True)
+    ngo = models.ForeignKey(NGO, on_delete=models.SET_NULL, blank=True, null=True)
+    rest = models.ForeignKey(Restaurant, on_delete=models.SET_NULL, blank=True, null=True)
