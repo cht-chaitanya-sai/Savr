@@ -100,13 +100,13 @@ def logoutView(request):
 
 
 def ListFoodDonation(request):
-    if request.method=="POST":
-        dish=request.POST.get("dish")
-        qty=request.POST.get("quantity")
-        pickup_datetime=request.POST.get('pickup_time')
-        pickup_datetime=datetime.strptime(pickup_datetime, "%Y-%m-%dT%H:%M")
-        rest=request.user.rest
+    if request.method == "POST":
+        dish = request.POST.get("dish")
+        qty = request.POST.get("quantity")
+        pickup_datetime = request.POST.get("pickup_time")
+        pickup_datetime = datetime.strptime(pickup_datetime, "%Y-%m-%dT%H:%M")
+        rest = request.user.rest
         print(dish, qty, pickup_datetime, rest)
 
         # order=Order(dish=dish, qty=qty, rest=rest)
-        return JsonResponse({'success': True})
+        return JsonResponse({"success": True})
