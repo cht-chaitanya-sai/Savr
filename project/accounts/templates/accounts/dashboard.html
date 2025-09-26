@@ -247,6 +247,28 @@
 {% block scripts %}
 <script>
 
+   document.addEventListener('DOMContentLoaded', function() {
+    const greetingEl = document.getElementById('greeting-text');
+
+    if (greetingEl) {
+      const now = new Date();
+
+      // Get day name
+      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const dayName = days[now.getDay()];
+
+      // Get part of the day
+      const hour = now.getHours();
+      let partOfDay = "";
+      if (hour < 12) partOfDay = "morning";
+      else if (hour < 17) partOfDay = "afternoon";
+      else partOfDay = "evening";
+
+      // Update greeting
+      greetingEl.textContent = `Here's a summary of your donation activity. It's ${dayName} ${partOfDay}—thank you for helping reduce food waste!`;
+    }
+  });
+
   document.addEventListener('DOMContentLoaded', function() {
     lucide.createIcons();
 
