@@ -1,116 +1,173 @@
 <!doctype html>
 <html lang="en">
-    <head>
-            <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Savr | Turn Surplus into Support</title>
 
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* Custom styles to complement Tailwind */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa; /* A very light grey background for a soft feel */
-        }
+      /* Custom styles to complement Tailwind */
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8f9fa; /* A very light grey background for a soft feel */
+      }
 
-        /* Custom gradient for the hero section */
-        .hero-gradient {
-            background: linear-gradient(135deg, #FFFAE6 0%, #F0FFF0 100%);
-        }
+      /* Custom gradient for the hero section */
+      .hero-gradient {
+        background: linear-gradient(135deg, #fffae6 0%, #f0fff0 100%);
+      }
 
-        /* Style for the active testimonial dot */
-        .dot.active {
-            background-color: #F59E0B; /* Amber-500 */
-            transform: scale(1.25);
-        }
+      /* Style for the active testimonial dot */
+      .dot.active {
+        background-color: #f59e0b; /* Amber-500 */
+        transform: scale(1.25);
+      }
 
-        /* Subtle animation for hero section buttons */
-        .cta-button {
-            transition: all 0.3s ease;
-        }
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
-        }
+      /* Subtle animation for hero section buttons */
+      .cta-button {
+        transition: all 0.3s ease;
+      }
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
+      }
 
-        /* Fade-in animation for elements on scroll */
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+      /* Fade-in animation for elements on scroll */
+      .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.8s ease-out,
+          transform 0.8s ease-out;
+      }
 
-        .reveal-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+      .reveal-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     </style>
-    </head>
+  </head>
 
-    <body class="text-gray-800">
-    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-3xl font-extrabold text-green-600">Savr.</a>
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="#how-it-works" class="text-gray-600 hover:text-green-600 transition-colors">How It Works</a>
-                <a href="#impact" class="text-gray-600 hover:text-green-600 transition-colors">Our Impact</a>
-                <a href="#testimonials" class="text-gray-600 hover:text-green-600 transition-colors">Testimonials</a>
-            </nav>
-            <div class="flex items-center space-x-4">
-                <a href="#" class="hidden sm:block text-gray-600 font-medium hover:text-green-600 transition-colors">Login</a>
-                <a href="#" class="bg-green-600 text-white font-bold py-2 px-5 rounded-full hover:bg-green-700 transition-transform hover:scale-105">Sign Up</a>
-            </div>
+  <body class="text-gray-800">
+    <header
+      class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm"
+    >
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a href="#" class="text-3xl font-extrabold text-green-600">Savr.</a>
+        <nav class="hidden md:flex items-center space-x-8">
+          <a
+            href="#how-it-works"
+            class="text-gray-600 hover:text-green-600 transition-colors"
+            >How It Works</a
+          >
+          <a
+            href="#impact"
+            class="text-gray-600 hover:text-green-600 transition-colors"
+            >Our Impact</a
+          >
+          <a
+            href="#testimonials"
+            class="text-gray-600 hover:text-green-600 transition-colors"
+            >Testimonials</a
+          >
+        </nav>
+        <div class="flex items-center space-x-4">
+          <a
+            href="#"
+            class="hidden sm:block text-gray-600 font-medium hover:text-green-600 transition-colors"
+            >Login</a
+          >
+          <a
+            href="#"
+            class="bg-green-600 text-white font-bold py-2 px-5 rounded-full hover:bg-green-700 transition-transform hover:scale-105"
+            >Sign Up</a
+          >
         </div>
+      </div>
     </header>
-        <footer class="bg-gray-800 text-white py-16">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-2xl font-extrabold text-green-500 mb-4">Savr.</h3>
-                    <p class="text-gray-400">Reducing food waste and fighting hunger, together.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-lg mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
-                    </ul>
-                </div>
-                 <div>
-                    <h4 class="font-bold text-lg mb-4">Legal</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Food Safety Guidelines</a></li>
-                    </ul>
-                </div>
-                 <div>
-                    <h4 class="font-bold text-lg mb-4">Follow Us</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><i data-lucide="twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i data-lucide="instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i data-lucide="linkedin"></i></a>
-                    </div>
-                </div>
+    {% block content %} {% endblock content %}
+    <footer class="bg-gray-800 text-white py-16">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-2xl font-extrabold text-green-500 mb-4">Savr.</h3>
+            <p class="text-gray-400">
+              Reducing food waste and fighting hunger, together.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-4">Quick Links</h4>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">About Us</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Contact</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">FAQs</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-4">Legal</h4>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Food Safety Guidelines</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-4">Follow Us</h4>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i data-lucide="twitter"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i data-lucide="instagram"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i data-lucide="linkedin"></i
+              ></a>
             </div>
-            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-gray-500">
-                &copy; 2025 Savr Initiative. All Rights Reserved.
-            </div>
+          </div>
         </div>
+        <div
+          class="mt-12 border-t border-gray-700 pt-8 text-center text-gray-500"
+        >
+          &copy; 2025 Savr Initiative. All Rights Reserved.
+        </div>
+      </div>
     </footer>
 
-    {% block scripts %}
-    {% endblock scripts %}
-    </body>
+    {% block scripts %} {% endblock scripts %}
+  </body>
 </html>
