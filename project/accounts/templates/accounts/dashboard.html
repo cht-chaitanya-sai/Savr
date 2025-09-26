@@ -47,10 +47,12 @@
                 <div class="bg-white p-6 rounded-xl shadow-md">
                     <h2 class="text-2xl font-bold text-gray-800 mb-4">Active Donations</h2>
                     <div class="space-y-4">
+                        {% for donation in active_donations %}
+                        {% if donation.status == 'Clmd' %}
                         <div class="p-4 border rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-green-50 border-green-200">
                             <div>
-                                <h3 class="font-bold text-lg text-gray-900">Vegetable Biryani (Serves 15-20)</h3>
-                                <p class="text-sm text-gray-600">Pickup by: 10:30 PM Tonight</p>
+                                <h3 class="font-bold text-lg text-gray-900">{{ donation.dish }} (Quantity - {{ donation.qty }})</h3>
+                                <p class="text-sm text-gray-600">Pickup by: {{ donation.pickup_datetime }}</p>
                             </div>
                             <div class="text-sm text-center">
                                 <span class="font-semibold px-3 py-1 rounded-full bg-green-200 text-green-800">Claimed</span>
@@ -60,10 +62,11 @@
                                 <button class="text-sm text-white bg-green-500 hover:bg-green-600 rounded-md px-3 py-1">Mark Picked Up</button>
                             </div>
                         </div>
+                        {% elif donation.status == 'Ld' %}
                         <div class="p-4 border rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                             <div>
-                                <h3 class="font-bold text-lg text-gray-900">Dal Makhani (5 Litres)</h3>
-                                <p class="text-sm text-gray-600">Pickup by: 11:00 PM Tonight</p>
+                                <h3 class="font-bold text-lg text-gray-900">{{ donation.dish }} (Quantity - {{ donation.qty }})</h3>
+                                <p class="text-sm text-gray-600">Pickup by: {{ donation.pickup_datetime }}</p>
                             </div>
                              <span class="font-semibold px-3 py-1 rounded-full bg-amber-100 text-amber-800">Listed</span>
                             <div class="flex items-center gap-2 mt-2 sm:mt-0">
@@ -71,6 +74,8 @@
                                 <button class="text-sm text-red-600 hover:text-red-800"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                             </div>
                         </div>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-md">
