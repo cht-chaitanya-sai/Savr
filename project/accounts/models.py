@@ -8,7 +8,7 @@ class NGO(models.Model):
     location=models.TextField()
     email=models.EmailField()
     ngoid=models.IntegerField()
-    profile=models.ImageField(upload_to="ngo/")
+    profile=models.ImageField(upload_to="ngo/", null=True, blank=True)
 
 
 class Restaurant(models.Model):
@@ -17,7 +17,7 @@ class Restaurant(models.Model):
     email=models.EmailField()
     phone=models.IntegerField(validators=[MinValueValidator(0000000000), MaxValueValidator(9999999999)])
     fssai=models.IntegerField()
-    profile=models.ImageField(upload_to="rest/")
+    profile=models.ImageField(upload_to="rest/", null=True, blank=True)
 
 
 class CustomUser(AbstractUser):
