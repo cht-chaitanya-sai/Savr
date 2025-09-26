@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import NGO, Restaurant, CustomUser
 from base.models import Orders
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseForbidden
 from datetime import datetime
 
 
@@ -208,7 +208,9 @@ def PickedFoodView(request, pk):
 @login_required
 def DltFoodView(request, pk):
     order = Orders.objects.get(id=pk)
-    order.delete()
+    if order.rest != request.user.rest:
+        return HttpResponseForbidden("You cannot delete other users' order")
 
+    order.delete()
     return redirect("dashboard")
 
