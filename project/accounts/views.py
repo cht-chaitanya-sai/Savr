@@ -6,7 +6,6 @@ from .models import NGO, Restaurant, CustomUser
 from django.http import HttpResponse
 
 
-# Create your views here.
 class RestSignUpView(View):
     template = "accounts/rest_signup.html"
     model = Restaurant
