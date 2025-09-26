@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from .models import NGO, Restaurant, CustomUser
 from django.http import HttpResponse
 
+
 # Create your views here.
 class RestSignUpView(View):
     template = "accounts/rest_signup.html"
@@ -74,19 +75,20 @@ class LoginView(View):
     def get(self, request):
         return render(request, self.template)
 
-
     def post(self, request):
-        username=request.POST.get('email')
-        password=request.POST.get('password')
+        username = request.POST.get("email")
+        password = request.POST.get("password")
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('main_page')
+            return redirect("dashboard")
         else:
             return HttpResponse("Error")
+
 
 class DashboardView(View):
     template = "accounts/dashboard.html"
 
     def get(self, request):
         return render(request, self.template)
+
