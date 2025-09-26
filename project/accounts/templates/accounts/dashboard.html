@@ -107,10 +107,7 @@
         </div>
 
         {% elif request.user.type == "NGO" %}
-        <!-- =================================================================== -->
-        <!-- ======================= NGO DASHBOARD VIEW ======================== -->
-        <!-- =================================================================== -->
-        <!-- ... existing NGO dashboard code ... -->
+
         <div class="mb-8">
             <h1 class="text-4xl font-extrabold text-gray-800">Welcome, {{ request.user.ngo.name }}!</h1>
             <p class="text-lg text-gray-600 mt-2">There are fresh food donations available near you. Thank you for your incredible work.</p>
