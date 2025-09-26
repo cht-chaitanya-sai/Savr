@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import NGO, Restaurant, CustomUser
 from base.models import Orders
@@ -99,33 +100,50 @@ class DashboardView(LoginRequiredMixin, View):
             )
             context["active_donations"] = active_donations
 
-            donation_history=self.request.user.rest.orders_set.filter(status="Clcd")
-            context['donation_history']=donation_history
+            donation_history = self.request.user.rest.orders_set.filter(status="Clcd")
+            context["donation_history"] = donation_history
 
-            no_of_meals_donated=self.request.user.rest.orders_set.filter(status="Clcd").count()
-            context['no_of_meals_donated']=no_of_meals_donated
+            no_of_meals_donated = self.request.user.rest.orders_set.filter(
+                status="Clcd"
+            ).count()
+            context["no_of_meals_donated"] = no_of_meals_donated
 
-            no_of_donations_month=self.request.user.rest.orders_set.filter(status="Clcd", pickup_datetime__month=datetime.now().month).count()
-            context['no_of_donations_month']=no_of_donations_month
+            no_of_donations_month = self.request.user.rest.orders_set.filter(
+                status="Clcd", pickup_datetime__month=datetime.now().month
+            ).count()
+            context["no_of_donations_month"] = no_of_donations_month
 
-            no_of_waste_reduced=self.request.user.rest.orders_set.filter(status="Clcd").count() * 10
-            context['no_of_waste_reduced']=no_of_waste_reduced
+            no_of_waste_reduced = (
+                self.request.user.rest.orders_set.filter(status="Clcd").count() * 10
+            )
+            context["no_of_waste_reduced"] = no_of_waste_reduced
         elif request.user.type == "NGO":
             context = {}
             available_donations = Orders.objects.filter(status="Ld")
             context["available_donations"] = available_donations
 
-            active_pickups=self.request.user.ngo.orders_set.filter(status="Clmd")
-            context['active_pickups'] = active_pickups
+            active_pickups = self.request.user.ngo.orders_set.filter(status="Clmd")
+            context["active_pickups"] = active_pickups
 
-            no_of_meals_recieved=self.request.user.ngo.orders_set.filter(status="Clcd").count()
-            context['no_of_meals_recieved'] = no_of_meals_recieved
+            no_of_meals_recieved = self.request.user.ngo.orders_set.filter(
+                status="Clcd"
+            ).count()
+            context["no_of_meals_recieved"] = no_of_meals_recieved
 
-            no_of_pickups_month=self.request.user.ngo.orders_set.filter(status="Clcd", pickup_datetime__month=datetime.now().month).count()
-            context['no_of_pickups_month']=no_of_pickups_month
+            no_of_pickups_month = self.request.user.ngo.orders_set.filter(
+                status="Clcd", pickup_datetime__month=datetime.now().month
+            ).count()
+            context["no_of_pickups_month"] = no_of_pickups_month
 
-            no_of_rest = self.request.user.ngo.orders_set.filter(status="Clcd",).values('rest').distinct().count()
-            context['no_of_rest'] = no_of_rest 
+            no_of_rest = (
+                self.request.user.ngo.orders_set.filter(
+                    status="Clcd",
+                )
+                .values("rest")
+                .distinct()
+                .count()
+            )
+            context["no_of_rest"] = no_of_rest
 
         return render(request, self.template, context)
 
@@ -135,6 +153,7 @@ def logoutView(request):
     return redirect("main_page")
 
 
+@login_required
 def ListFoodDonation(request):
     if request.method == "POST":
         dish = request.POST.get("dish")
@@ -147,25 +166,49 @@ def ListFoodDonation(request):
         order.save()
 
         return JsonResponse({"success": True})
-    
+
+
+@login_required
+def UpdateFoodDonation(request):
+    if request.method == "POST":
+        editing_id = request.POST.get("editingId")
+        dish = request.POST.get("dish")
+        qty = request.POST.get("quantity")
+        pickup_datetime = request.POST.get("pickup_time")
+        pickup_datetime = datetime.strptime(pickup_datetime, "%Y-%m-%dT%H:%M")
+
+        order = Orders.objects.get(id=editing_id)
+        order.dish = dish
+        order.qty = qty
+        order.pickup_datetime = pickup_datetime
+        order.save()
+
+        return JsonResponse({"success": True})
+
+
+@login_required
 def ClaimFoodView(request, pk):
-    order=Orders.objects.get(id=pk)
-    order.claimed_ngo=request.user.ngo
-    order.status="Clmd"
+    order = Orders.objects.get(id=pk)
+    order.claimed_ngo = request.user.ngo
+    order.status = "Clmd"
     order.save()
 
     return redirect("dashboard")
 
+
+@login_required
 def PickedFoodView(request, pk):
-    order=Orders.objects.get(id=pk)
-    order.status="Clcd"
+    order = Orders.objects.get(id=pk)
+    order.status = "Clcd"
     order.save()
 
     return redirect("dashboard")
 
 
+@login_required
 def DltFoodView(request, pk):
-    order=Orders.objects.get(id=pk)
+    order = Orders.objects.get(id=pk)
     order.delete()
 
     return redirect("dashboard")
+

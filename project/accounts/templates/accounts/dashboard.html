@@ -285,6 +285,8 @@
       }
     }
 
+    let editingId = -1;
+
     const addDonationButton = document.getElementById('add-donation-button');
     const editDonationButtons = document.querySelectorAll('.edit-donation-button');
     const addDonationModal = document.getElementById('add-donation-modal');
@@ -373,6 +375,7 @@
 
     const closeModal = () => {
       if (addDonationModal) {
+        editingId = -1
         addDonationModal.classList.add('opacity-0');
         modalContent.classList.add('scale-95', 'opacity-0');
         setTimeout(() => {
@@ -389,6 +392,7 @@
         document.getElementById('food-name').value = '';
         document.getElementById('quantity').value = '';
         setPickupTime()
+        document.getElementById('list-donation-button').textContent = 'List Donation'
       });
     }
 
@@ -409,10 +413,12 @@
         openModal();
 
         const donationId = button.getAttribute('data-donation-id')
+        editingId = donationId
         const donationParent = document.getElementById(`donation-${donationId}`)
         document.getElementById('food-name').value = donationParent.querySelector('h3 span').textContent
         document.getElementById('quantity').value = donationParent.querySelector('h3 span.qty').textContent
         setPickupTime(formatTime(donationParent.querySelector('p').textContent.split("Pickup by: ")[1]))
+        document.getElementById('list-donation-button').textContent = 'Update'
       })
     })
 
@@ -452,13 +458,14 @@
         }
 
         const postData = {
+          'editingId': editingId,
           'dish': dish,
           'quantity': parseInt(quantity),
           'pickup_time': pickup_time,
           'csrfmiddlewaretoken': csrf
         };
 
-        sendPostRequestXHR('/list_food_donation/', postData, (err, response) => {
+        sendPostRequestXHR(editingId > -1 ? '/update_food_donation/':'/list_food_donation/', postData, (err, response) => {
           if (err) {
             console.error(err);
             showAlert('error');
