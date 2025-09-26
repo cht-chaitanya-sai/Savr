@@ -112,7 +112,6 @@
                 </div>
             </div>
             {% else %}
-            <!-- Login/Signup buttons for logged-out users -->
               <a
                 href="{% url 'login' %}"
                 class="hidden sm:block text-gray-600 font-medium hover:text-green-600 transition-colors"
@@ -206,18 +205,18 @@
 
             if (profileButton && profileDropdown && profileContainer) {
                 profileButton.addEventListener('click', () => {
+                    // This toggles the dropdown when the button is clicked
                     profileDropdown.classList.toggle('hidden');
                 });
 
-                // Close dropdown when clicking outside of the menu container
-                document.addEventListener('click', function(e) {
+                // This closes the dropdown if a click is detected outside of its container
+                window.addEventListener('click', function(e) {
                     if (!profileContainer.contains(e.target)) {
                         profileDropdown.classList.add('hidden');
                     }
                 });
             }
 
-            // Other scripts from child templates can be added here
         });
     </script>
     {% block scripts %}
