@@ -50,13 +50,18 @@
             </div>
         </form>
         <div class="text-sm text-center">
-            <p class="text-gray-600">Already operationshave an account?
+            <p class="text-gray-600">
+                <a href="{% url 'ngo_signup' %}" class="font-medium text-amber-600 hover:text-amber-500">
+                    Sign up as an NGO instead
+                </a>
+            </p>
+            <p class="text-gray-600">Already have an account?
                 <a href="{% url 'login' %}" class="font-medium text-green-600 hover:text-green-500">
                     Sign In
-                </a>.
+                </a>
+
             </p>
         </div>
     </div>
 </div>
 {% endblock %}
-
