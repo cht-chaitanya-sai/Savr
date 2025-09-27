@@ -51,7 +51,8 @@
       /* Use extra-bold weight */
     }
 
-      .cursor {
+.cursor {
+        display: inline-block; /* CRITICAL FIX: Ensures the element has a renderable box */
         position: relative;
         border-radius: 9999px;
         transform-origin: bottom;
@@ -60,19 +61,7 @@
         animation: fluid-cursor-animation 2s ease-in-out infinite;
       }
 
-      @-webkit-keyframes fluid-cursor-animation {
-        0%, 100% {
-          -webkit-transform: scaleY(1) scaleX(1);
-          transform: scaleY(1) scaleX(1);
-          opacity: 1;
-        }
-        50% {
-          -webkit-transform: scaleY(0.1) scaleX(3);
-          transform: scaleY(0.1) scaleX(3);
-          opacity: 0.5;
-        }
-      }
-
+      /* ... keyframes and other styles remain the same ... */
       @keyframes fluid-cursor-animation {
         0%, 100% {
           transform: scaleY(1) scaleX(1);
