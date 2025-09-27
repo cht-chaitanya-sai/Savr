@@ -55,7 +55,13 @@ Can even be dummy seeded data for the hackathon demo.
 - Tailwind CSS  
 
 **Backend**  
-- Django Framework (Python)  
+- Django Framework (Python)
+
+**APIs**
+- Google Place Autocomplete
+
+**Libraries**
+- GeoPy
 
 ---
 
