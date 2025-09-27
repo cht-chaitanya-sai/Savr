@@ -15,15 +15,6 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-
-  * {
-  cursor: none !important;
-}
-
-    :root {
-  --purple: #9333ea;        /* nice modern purple */
-  --light-purple: #c084fc;}
-
     body {
       font-family: "Inter", sans-serif;
       background-color: #f8f9fa;
@@ -69,19 +60,11 @@
                   opacity 0.3s ease;
       z-index: 9999;
     }
-.cursor-dot {
-  pointer-events: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: var(--purple);
-  transform: translate(-50%, -50%);
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 9999;
-}
+    .cursor-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--purple);
+    }
     .cursor-outline {
       width: 28px;
       height: 28px;
@@ -89,10 +72,10 @@
       mix-blend-mode: difference;
       opacity: 0.7;
     }
-.cursor-interact {
-  transform: translate(-50%, -50%) scale(2.2);
-  background-color: var(--light-purple);
-}
+    .cursor-interact {
+      transform: translate(-50%, -50%) scale(1.8);
+      border-color: var(--light-purple);
+    }
 
 
     @keyframes glitter {
@@ -168,9 +151,10 @@
 
 <body class="text-gray-800">
 
-<div class="cursor-dot" style="filter:url(#goo)"></div>
-<div class="cursor-outline" style="filter:url(#goo)"></div>
-
+  <div class="cursor">
+    <span id="main"></span>
+    <span id="follower"></span>
+  </div>
 
 
   <svg>
@@ -328,25 +312,26 @@
   <script>
 
     const cursorDot = document.querySelector(".cursor-dot");
-    const cursorOutline = document.querySelector(".cursor-outline");
+const cursorOutline = document.querySelector(".cursor-outline");
 
-    window.addEventListener("mousemove", e => {
-      cursorDot.style.top = `${e.clientY}px`;
-      cursorDot.style.left = `${e.clientX}px`;
-      cursorOutline.style.top = `${e.clientY}px`;
-      cursorOutline.style.left = `${e.clientX}px`;
-    });
+// Track mouse movement
+window.addEventListener("mousemove", e => {
+  cursorDot.style.top = `${e.clientY}px`;
+  cursorDot.style.left = `${e.clientX}px`;
+  cursorOutline.style.top = `${e.clientY}px`;
+  cursorOutline.style.left = `${e.clientX}px`;
+});
 
-    // Expand cursor on interactive elements
-    const targets = document.querySelectorAll("a, button");
-    targets.forEach(el => {
-      el.addEventListener("mouseenter", () => {
-        cursorOutline.classList.add("cursor-interact");
-      });
-      el.addEventListener("mouseleave", () => {
-        cursorOutline.classList.remove("cursor-interact");
-      });
-    });
+// Expand cursor on clickable items
+const targets = document.querySelectorAll("a, button, .project-card, .skill-item");
+targets.forEach(el => {
+  el.addEventListener("mouseenter", () => {
+    cursorOutline.classList.add("cursor-interact");
+  });
+  el.addEventListener("mouseleave", () => {
+    cursorOutline.classList.remove("cursor-interact");
+  });
+});
 
     document.addEventListener("DOMContentLoaded", function () {
       lucide.createIcons();
