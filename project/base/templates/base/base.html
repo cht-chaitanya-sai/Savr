@@ -51,10 +51,25 @@
       /* Use extra-bold weight */
     }
 
-    .cursor {
-        border-radius: 9999px; /* Make it rounded */
-        transform-origin: bottom; /* Animate from the base */
+.cursor {
+        position: relative; /* Added for transform stability */
+        border-radius: 9999px;
+        transform-origin: bottom;
+        -webkit-animation: fluid-cursor-animation 2s ease-in-out infinite;
         animation: fluid-cursor-animation 2s ease-in-out infinite;
+      }
+
+      @-webkit-keyframes fluid-cursor-animation {
+        0%, 100% {
+          -webkit-transform: scaleY(1) scaleX(1);
+          transform: scaleY(1) scaleX(1);
+          opacity: 1;
+        }
+        50% {
+          -webkit-transform: scaleY(0.1) scaleX(3);
+          transform: scaleY(0.1) scaleX(3);
+          opacity: 0.5;
+        }
       }
 
       @keyframes fluid-cursor-animation {
