@@ -9,6 +9,7 @@ from .models import NGO, Restaurant, CustomUser
 from base.models import Orders
 from django.http import HttpResponse, JsonResponse, HttpResponseForbidden
 from datetime import datetime
+from geopy.geocoders import Nominatim
 
 
 class RestSignUpView(View):
@@ -32,9 +33,18 @@ class RestSignUpView(View):
         else:
             messages.error(request, "Password and Confirm Password do not match")
             return redirect("restaurant_signup")
+        
+        geolocator = Nominatim(user_agent="savr")
+        address=name+", " + location
+        print(address)
+        loc = geolocator.geocode(address)
+        print(loc)
+        latitude=loc.latitude
+        longitude=loc.longitude
 
         rest = Restaurant(
-            name=name, location=location, email=email, phone=phone, fssai=fssai
+            name=name, location=location, email=email, phone=phone, fssai=fssai,
+            latitude=latitude, longitude=longitude    
         )
         rest.save()
 
@@ -64,7 +74,16 @@ class NGOSignUpView(View):
         else:
             return HttpResponse("Error")
 
-        ngo = NGO(name=name, location=location, email=email, ngoid=ngoid)
+        
+        geolocator = Nominatim(user_agent="savr")
+        loc = geolocator.geocode(location)
+        latitude=loc.latitude
+        longitude=loc.longitude
+
+
+        ngo = NGO(name=name, location=location, email=email, ngoid=ngoid,
+            latitude=latitude, longitude=longitude    
+        )
         ngo.save()
 
         user = CustomUser(username=email, email=email, type="NGO", ngo=ngo)

@@ -13,3 +13,4 @@ class Orders(models.Model):
         ('Clcd', 'Collected')
     ])
     claimed_ngo=models.ForeignKey(NGO, on_delete=models.SET_NULL, blank=True, null=True)
+    

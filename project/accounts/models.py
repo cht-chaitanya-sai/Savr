@@ -6,6 +6,8 @@ from django.contrib.auth.models import AbstractUser
 class NGO(models.Model):
     name = models.CharField(max_length=100)
     location = models.TextField()
+    latitude = models.FloatField(blank=True, null=True)
+    longitude= models.FloatField(blank=True, null=True)
     email = models.EmailField()
     ngoid = models.IntegerField()
     profile = models.ImageField(upload_to="ngo/", null=True, blank=True)
@@ -17,6 +19,8 @@ class NGO(models.Model):
 class Restaurant(models.Model):
     name = models.CharField(max_length=100)
     location = models.TextField()
+    latitude = models.FloatField(blank=True, null=True)
+    longitude= models.FloatField(blank=True, null=True)
     email = models.EmailField()
     phone = models.IntegerField(
         validators=[MinValueValidator(0000000000), MaxValueValidator(9999999999)]

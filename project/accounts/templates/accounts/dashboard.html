@@ -270,7 +270,8 @@
                 </h3>
                 <p class="text-sm text-gray-600 mt-1">
                   <span class="font-semibold">Quantity:</span> {{ donation.qty }}<br />
-                  <span class="font-semibold">Pickup by:</span> {{ donation.pickup_datetime }}
+                  <span class="font-semibold">Pickup by:</span> {{ donation.pickup_datetime }}<br/>
+                  <span class="font-semibold">Address:</span> {{ donation.rest.location }}
                 </p>
               </div>
               <div
@@ -311,6 +312,9 @@
                 </h3>
                 <p class="text-sm text-gray-600 mt-1">
                   <span class="font-semibold">Pickup by:</span> {{ order.pickup_datetime }}
+                </p>
+                <p class="text-sm text-gray-600 mt-1">
+                  <span class="font-semibold">Address:</span> {{ order.rest.location }}
                 </p>
               </div>
               <div class="flex items-center gap-2 mt-2 sm:mt-0 flex-shrink-0">
