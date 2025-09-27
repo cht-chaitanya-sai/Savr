@@ -51,31 +51,36 @@
       /* Use extra-bold weight */
     }
 
-.cursor {
+      .cursor {
         position: relative;
-        transform-origin: center; /* Center the scaling effect */
-        will-change: transform;
-        -webkit-animation: heartbeat-cursor 1.5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
-        animation: heartbeat-cursor 1.5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+        border-radius: 9999px;
+        transform-origin: bottom;
+        will-change: transform, opacity;
+        -webkit-animation: fluid-cursor-animation 2s ease-in-out infinite;
+        animation: fluid-cursor-animation 2s ease-in-out infinite;
       }
 
-      @-webkit-keyframes heartbeat-cursor {
+      @-webkit-keyframes fluid-cursor-animation {
         0%, 100% {
-          -webkit-transform: scale(1);
-          transform: scale(1);
+          -webkit-transform: scaleY(1) scaleX(1);
+          transform: scaleY(1) scaleX(1);
+          opacity: 1;
         }
         50% {
-          -webkit-transform: scale(1.4);
-          transform: scale(1.4);
+          -webkit-transform: scaleY(0.1) scaleX(3);
+          transform: scaleY(0.1) scaleX(3);
+          opacity: 0.5;
         }
       }
 
-      @keyframes heartbeat-cursor {
+      @keyframes fluid-cursor-animation {
         0%, 100% {
-          transform: scale(1);
+          transform: scaleY(1) scaleX(1);
+          opacity: 1;
         }
         50% {
-          transform: scale(1.4); /* Pulsing effect */
+          transform: scaleY(0.1) scaleX(3); /* Squash and stretch effect */
+          opacity: 0.5;
         }
       }
 
