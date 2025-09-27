@@ -11,6 +11,7 @@ from django.http import HttpResponse, JsonResponse, HttpResponseForbidden
 from datetime import datetime
 from geopy.geocoders import Nominatim
 from geopy import distance
+from django.db.models import Sum, F
 
 
 class RestSignUpView(View):
@@ -272,3 +273,18 @@ def DltFoodView(request, pk):
 
     order.delete()
     return redirect("dashboard")
+
+
+class LeaderboardView(LoginRequiredMixin, View):
+    template="accounts/leaderboards.html"
+
+    def get(self, request):
+        top_restaurants_monthly = Orders.objects.filter(status="Clcd", pickup_datetime__month=datetime.now().month).values('rest__name').annotate(total_qty=Sum('qty'))
+        top_ngos_monthly = Orders.objects.filter(status="Clcd", pickup_datetime__month=datetime.now().month).values('claimed_ngo__name').annotate(total_qty=Sum('qty'))
+
+        top_restaurants_all_time = Orders.objects.filter(status="Clcd").values('rest__name').annotate(total_qty=Sum('qty'))
+        top_ngos_all_time = Orders.objects.filter(status="Clcd").values('claimed_ngo__name').annotate(total_qty=Sum('qty'))
+
+        context={'current_month_name': datetime.now().strftime("%B"), 'top_restaurants_monthly': top_restaurants_monthly, 'top_ngos_monthly': top_ngos_monthly, 'top_restaurants_all_time': top_restaurants_all_time, 'top_ngos_all_time': top_ngos_all_time}
+
+        return render(request, self.template, context)
