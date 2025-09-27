@@ -51,6 +51,23 @@
       /* Use extra-bold weight */
     }
 
+    .cursor {
+        border-radius: 9999px; /* Make it rounded */
+        transform-origin: bottom; /* Animate from the base */
+        animation: fluid-cursor-animation 2s ease-in-out infinite;
+      }
+
+      @keyframes fluid-cursor-animation {
+        0%, 100% {
+          transform: scaleY(1) scaleX(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scaleY(0.1) scaleX(3); /* Squash and stretch effect */
+          opacity: 0.5;
+        }
+      }
+
     @keyframes glitter {
       0% {
         background-position: 0% 50%;
