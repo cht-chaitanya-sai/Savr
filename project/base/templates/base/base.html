@@ -18,16 +18,8 @@
     body {
       font-family: "Inter", sans-serif;
       background-color: #f8f9fa;
-      margin: 0;
-      overflow: hidden;
-      cursor: none;
+      /* A very light grey background for a soft feel */
     }
-
-  canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
 
     .hero-gradient {
       background: linear-gradient(135deg, #fffae6 0%, #f0fff0 100%);
@@ -59,17 +51,12 @@
       /* Use extra-bold weight */
     }
 
-.cursor {
-        display: inline-block; /* CRITICAL FIX: Ensures the element has a renderable box */
-        position: relative;
-        border-radius: 9999px;
-        transform-origin: bottom;
-        will-change: transform, opacity;
-        -webkit-animation: fluid-cursor-animation 2s ease-in-out infinite;
+    .cursor {
+        border-radius: 9999px; /* Make it rounded */
+        transform-origin: bottom; /* Animate from the base */
         animation: fluid-cursor-animation 2s ease-in-out infinite;
       }
 
-      /* ... keyframes and other styles remain the same ... */
       @keyframes fluid-cursor-animation {
         0%, 100% {
           transform: scaleY(1) scaleX(1);
