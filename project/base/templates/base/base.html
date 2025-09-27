@@ -19,7 +19,6 @@
     body {
       font-family: "Inter", sans-serif;
       background-color: #f8f9fa;
-      cursor: none;
     }
 
     .hero-gradient {
@@ -281,27 +280,6 @@
   </footer>
 
   <script>
-
-    const cursorDot = document.querySelector(".cursor-dot");
-    const cursorOutline = document.querySelector(".cursor-outline");
-
-    window.addEventListener("mousemove", e => {
-      cursorDot.style.top = `${e.clientY}px`;
-      cursorDot.style.left = `${e.clientX}px`;
-      cursorOutline.style.top = `${e.clientY}px`;
-      cursorOutline.style.left = `${e.clientX}px`;
-    });
-
-    // Expand cursor on interactive elements
-    const targets = document.querySelectorAll("a, button");
-    targets.forEach(el => {
-      el.addEventListener("mouseenter", () => {
-        cursorOutline.classList.add("cursor-interact");
-      });
-      el.addEventListener("mouseleave", () => {
-        cursorOutline.classList.remove("cursor-interact");
-      });
-    });
 
     document.addEventListener("DOMContentLoaded", function () {
       lucide.createIcons();
