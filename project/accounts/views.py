@@ -34,18 +34,25 @@ class RestSignUpView(View):
         else:
             messages.error(request, "Password and Confirm Password do not match")
             return redirect("restaurant_signup")
-        
-        geolocator = Nominatim(user_agent="savr")
-        address=name+", " + location
-        print(address)
-        loc = geolocator.geocode(address)
-        print(loc)
-        latitude=loc.latitude
-        longitude=loc.longitude
+
+        try:
+            geolocator = Nominatim(user_agent="savr")
+            address = name + ", " + location
+            loc = geolocator.geocode(address)
+            latitude = loc.latitude
+            longitude = loc.longitude
+        except:
+            messages.error(request, "Couldn't find your address")
+            return redirect("restaurant_signup")
 
         rest = Restaurant(
-            name=name, location=location, email=email, phone=phone, fssai=fssai,
-            latitude=latitude, longitude=longitude    
+            name=name,
+            location=location,
+            email=email,
+            phone=phone,
+            fssai=fssai,
+            latitude=latitude,
+            longitude=longitude,
         )
         rest.save()
 
@@ -75,15 +82,22 @@ class NGOSignUpView(View):
         else:
             return HttpResponse("Error")
 
-        
-        geolocator = Nominatim(user_agent="savr")
-        loc = geolocator.geocode(location)
-        latitude=loc.latitude
-        longitude=loc.longitude
+        try:
+            geolocator = Nominatim(user_agent="savr")
+            loc = geolocator.geocode(location)
+            latitude = loc.latitude
+            longitude = loc.longitude
+        except:
+            messages.error(request, "Couldn't find your address")
+            return redirect("ngo_signup")
 
-
-        ngo = NGO(name=name, location=location, email=email, ngoid=ngoid,
-            latitude=latitude, longitude=longitude    
+        ngo = NGO(
+            name=name,
+            location=location,
+            email=email,
+            ngoid=ngoid,
+            latitude=latitude,
+            longitude=longitude,
         )
         ngo.save()
 
@@ -143,16 +157,24 @@ class DashboardView(LoginRequiredMixin, View):
             context = {}
             available_donations = Orders.objects.filter(status="Ld")
 
-            donations=[]
+            donations = []
             for i in available_donations:
-                lat1=i.rest.latitude
-                long1=i.rest.longitude
-                lat2= request.user.ngo.latitude
-                long2= request.user.ngo.longitude
-                dist = distance.distance((lat1, long1), (lat2,long2)).km
-                donation={'rest': i.rest, 'qty': i.qty, 'pickup_datetime': str(i.pickup_datetime), 'location': i.rest.location, 'dish': i.dish, 'distance': round(dist, 2), 'id': i.id}
+                lat1 = i.rest.latitude
+                long1 = i.rest.longitude
+                lat2 = request.user.ngo.latitude
+                long2 = request.user.ngo.longitude
+                dist = distance.distance((lat1, long1), (lat2, long2)).km
+                donation = {
+                    "rest": i.rest,
+                    "qty": i.qty,
+                    "pickup_datetime": str(i.pickup_datetime),
+                    "location": i.rest.location,
+                    "dish": i.dish,
+                    "distance": round(dist, 2),
+                    "id": i.id,
+                }
                 donations.append(donation)
-            donations = sorted(donations, key=lambda x: x['distance'])
+            donations = sorted(donations, key=lambda x: x["distance"])
 
             context["available_donations"] = donations
 
