@@ -34,7 +34,7 @@
           <div class="bg-white p-6 rounded-2xl shadow-lg reveal-on-scroll">
             <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
               <i data-lucide="leaf" class="w-7 h-7 text-green-600"></i>
-              Top Restaurants (kg food saved)
+              Top Restaurants (quantity of food saved)
             </h2>
             <ol class="space-y-4">
               {% for restaurant in top_restaurants_monthly %}
@@ -49,7 +49,7 @@
                   </span>
                   <span class="font-semibold text-gray-800">{{ restaurant.rest__name }}</span>
                 </div>
-                <span class="font-extrabold text-green-700 text-lg">{{ restaurant.kg_saved|floatformat:1 }} kg</span>
+                <span class="font-extrabold text-green-700 text-lg">{{ restaurant.total_qty }} served</span>
               </li>
               {% empty %}
                 <p class="text-gray-500 p-3">No donations recorded this month yet.</p>
@@ -76,7 +76,7 @@
                   </span>
                   <span class="font-semibold text-gray-800">{{ ngo.claimed_ngo__name }}</span>
                 </div>
-                <span class="font-extrabold text-blue-700 text-lg">{{ ngo.total_meals }} meals</span>
+                <span class="font-extrabold text-blue-700 text-lg">{{ ngo.total_qty }} meals</span>
               </li>
               {% empty %}
                 <p class="text-gray-500 p-3">No pickups recorded this month yet.</p>
@@ -94,7 +94,7 @@
           <div class="bg-white p-6 rounded-2xl shadow-lg">
             <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
               <i data-lucide="leaf" class="w-7 h-7 text-green-600"></i>
-              Top Restaurants (kg food saved)
+              Top Restaurants (quantity of food saved)
             </h2>
             <ol class="space-y-4">
               {% for restaurant in top_restaurants_all_time %}
@@ -109,7 +109,7 @@
                   </span>
                   <span class="font-semibold text-gray-800">{{ restaurant.rest__name }}</span>
                 </div>
-                <span class="font-extrabold text-green-700 text-lg">{{ restaurant.kg_saved|floatformat:1 }} kg</span>
+                <span class="font-extrabold text-green-700 text-lg">{{ restaurant.total_qty }} served</span>
               </li>
               {% empty %}
                 <p class="text-gray-500 p-3">No completed donations yet!</p>
@@ -136,7 +136,7 @@
                   </span>
                   <span class="font-semibold text-gray-800">{{ ngo.claimed_ngo__name }}</span>
                 </div>
-                <span class="font-extrabold text-blue-700 text-lg">{{ ngo.total_meals }} meals</span>
+                <span class="font-extrabold text-blue-700 text-lg">{{ ngo.total_qty }} meals</span>
               </li>
               {% empty %}
                 <p class="text-gray-500 p-3">No completed pickups yet!</p>
