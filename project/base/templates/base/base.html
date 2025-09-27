@@ -49,22 +49,27 @@
       font-weight: 800;
     }
 
-  .cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    filter: url(#goo);
-    z-index: 9999;
-  }
+.cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #00f5d4;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s ease, height 0.25s ease, background 0.3s ease;
+      z-index: 9999;
+      mix-blend-mode: difference;
+    }
 
-  .cursor span {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #00f5d4;
-    transform: translate(-50%, -50%);
+    /* Cursor grows on hover */
+    .cursor.active {
+      width: 45px;
+      height: 45px;
+      background: rgba(0, 245, 212, 0.6);
+    }
 
     @keyframes glitter {
       0% {
@@ -299,28 +304,20 @@
 
   <script>
 
-    const cursor = document.querySelector(".cursor");
-  const main = document.getElementById("main");
-  const follower = document.getElementById("follower");
+    const cursor = document.querySelector('.cursor');
+    let mouseX = 0, mouseY = 0;
 
-  let mouseX = 0, mouseY = 0;
-  let followerX = 0, followerY = 0;
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    });
 
-  document.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-
-  function animate() {
-    followerX += (mouseX - followerX) * 0.15;
-    followerY += (mouseY - followerY) * 0.15;
-
-    main.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-    follower.style.transform = `translate(${followerX}px, ${followerY}px)`;
-
-    requestAnimationFrame(animate);
-  }
-  animate();
+    // Expand cursor on clickable elements
+    document.querySelectorAll('button, a, input, textarea').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+    });
 
     document.addEventListener("DOMContentLoaded", function () {
       lucide.createIcons();
