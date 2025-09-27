@@ -15,10 +15,10 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
+
     body {
       font-family: "Inter", sans-serif;
       background-color: #f8f9fa;
-      /* A very light grey background for a soft feel */
     }
 
     .hero-gradient {
@@ -27,7 +27,6 @@
 
     .dot.active {
       background-color: #f59e0b;
-      /* Amber-500 */
       transform: scale(1.25);
     }
 
@@ -48,25 +47,7 @@
       color: transparent;
       animation: glitter 5s ease-in-out infinite;
       font-weight: 800;
-      /* Use extra-bold weight */
     }
-
-    .cursor {
-        border-radius: 9999px; /* Make it rounded */
-        transform-origin: bottom; /* Animate from the base */
-        animation: fluid-cursor-animation 2s ease-in-out infinite;
-      }
-
-      @keyframes fluid-cursor-animation {
-        0%, 100% {
-          transform: scaleY(1) scaleX(1);
-          opacity: 1;
-        }
-        50% {
-          transform: scaleY(0.1) scaleX(3); /* Squash and stretch effect */
-          opacity: 0.5;
-        }
-      }
 
     @keyframes glitter {
       0% {
@@ -95,7 +76,6 @@
       transform: translateY(0);
     }
 
-    /* --- UPDATED: More Intense Underglow Animation --- */
     @keyframes underglow {
 
       0%,
@@ -116,25 +96,18 @@
 
     .glow-green {
       --glow-color-1: rgba(16, 185, 129, 0.5);
-      /* Tailwind green-500 */
       --glow-color-2: rgba(52, 211, 153, 0.3);
-      /* Tailwind green-400 */
       --glow-color-3: rgba(110, 231, 183, 0.2);
-      /* Tailwind green-300 */
       animation: underglow 3s ease-in-out infinite;
     }
 
     .glow-orange {
       --glow-color-1: rgba(245, 158, 11, 0.5);
-      /* Tailwind amber-500 */
       --glow-color-2: rgba(251, 191, 36, 0.3);
-      /* Tailwind amber-400 */
       --glow-color-3: rgba(252, 211, 77, 0.2);
-      /* Tailwind amber-300 */
       animation: underglow 3s ease-in-out infinite;
     }
 
-    /* --- NEW: Blinking Cursor for Typewriter --- */
     @keyframes blink {
       50% {
         opacity: 0;
@@ -148,6 +121,26 @@
 </head>
 
 <body class="text-gray-800">
+
+<div class="cursor-dot" style="filter:url(#goo)"></div>
+<div class="cursor-outline" style="filter:url(#goo)"></div>
+
+
+
+  <svg>
+    <defs>
+      <filter id="goo">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
+        <feColorMatrix in="blur" mode="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 20 -10" result="goo"/>
+        <feBlend in="SourceGraphic" in2="goo"/>
+      </filter>
+    </defs>
+  </svg>
+
   <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
       {% if request.user.is_authenticated %}
@@ -287,6 +280,7 @@
   </footer>
 
   <script>
+
     document.addEventListener("DOMContentLoaded", function () {
       lucide.createIcons();
 
