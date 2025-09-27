@@ -10,6 +10,7 @@ from base.models import Orders
 from django.http import HttpResponse, JsonResponse, HttpResponseForbidden
 from datetime import datetime
 from geopy.geocoders import Nominatim
+from geopy import distance
 
 
 class RestSignUpView(View):
@@ -141,7 +142,19 @@ class DashboardView(LoginRequiredMixin, View):
         elif request.user.type == "NGO":
             context = {}
             available_donations = Orders.objects.filter(status="Ld")
-            context["available_donations"] = available_donations
+
+            donations=[]
+            for i in available_donations:
+                lat1=i.rest.latitude
+                long1=i.rest.longitude
+                lat2= request.user.ngo.latitude
+                long2= request.user.ngo.longitude
+                dist = distance.distance((lat1, long1), (lat2,long2)).km
+                donation={'rest': i.rest, 'qty': i.qty, 'pickup_datetime': str(i.pickup_datetime), 'location': i.rest.location, 'dish': i.dish, 'distance': round(dist, 2), 'id': i.id}
+                donations.append(donation)
+            donations = sorted(donations, key=lambda x: x['distance'])
+
+            context["available_donations"] = donations
 
             active_pickups = self.request.user.ngo.orders_set.filter(status="Clmd")
             context["active_pickups"] = active_pickups

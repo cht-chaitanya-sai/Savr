@@ -290,7 +290,7 @@
                   class="text-sm font-bold text-gray-700 flex items-center gap-1.5"
                 >
                   <i data-lucide="map-pin" class="w-4 h-4 text-gray-500"></i>
-                  2.5 km away
+                  {{ donation.distance }} km away
                 </p>
                 <a
                   href="{% url 'claim_food' donation.id %}"
