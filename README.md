@@ -8,6 +8,8 @@
 
 Our mission is simple yet impactful: **reduce food waste and fight hunger** by creating a **seamless, trustworthy, and scalable donation pipeline**.
 
+Presentation: https://app.presentations.ai/view/AKBgN74VS9
+
 </div>
 
 ---

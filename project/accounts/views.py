@@ -282,31 +282,11 @@ class LeaderboardView(LoginRequiredMixin, View):
     template = "accounts/leaderboards.html"
 
     def get(self, request):
-        top_restaurants_monthly = (
-            Orders.objects.filter(
-                status="Clcd", pickup_datetime__month=datetime.now().month
-            )
-            .values("rest__name")
-            .annotate(total_qty=Sum("qty"))
-        )
-        top_ngos_monthly = (
-            Orders.objects.filter(
-                status="Clcd", pickup_datetime__month=datetime.now().month
-            )
-            .values("claimed_ngo__name")
-            .annotate(total_qty=Sum("qty"))
-        )
+        top_restaurants_monthly = Orders.objects.filter(status="Clcd", pickup_datetime__month=datetime.now().month).values('rest__name').annotate(total_qty=Sum('qty')).order_by('-total_qty')
+        top_ngos_monthly = Orders.objects.filter(status="Clcd", pickup_datetime__month=datetime.now().month).values('claimed_ngo__name').annotate(total_qty=Sum('qty')).order_by('-total_qty')
 
-        top_restaurants_all_time = (
-            Orders.objects.filter(status="Clcd")
-            .values("rest__name")
-            .annotate(total_qty=Sum("qty"))
-        )
-        top_ngos_all_time = (
-            Orders.objects.filter(status="Clcd")
-            .values("claimed_ngo__name")
-            .annotate(total_qty=Sum("qty"))
-        )
+        top_restaurants_all_time = Orders.objects.filter(status="Clcd").values('rest__name').annotate(total_qty=Sum('qty')).order_by('-total_qty')
+        top_ngos_all_time = Orders.objects.filter(status="Clcd").values('claimed_ngo__name').annotate(total_qty=Sum('qty')).order_by('-total_qty')
 
         context = {
             "current_month_name": datetime.now().strftime("%B"),
