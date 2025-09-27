@@ -9,9 +9,8 @@ from .models import NGO, Restaurant, CustomUser
 from base.models import Orders
 from django.http import HttpResponse, JsonResponse, HttpResponseForbidden
 from datetime import datetime
-from geopy.geocoders import Nominatim
 from geopy import distance
-from django.db.models import Sum, F
+from django.db.models import Sum
 
 
 class RestSignUpView(View):
@@ -23,7 +22,9 @@ class RestSignUpView(View):
 
     def post(self, request):
         name = request.POST.get("restaurant-name")
-        location = request.POST.get("address")
+        location = request.POST.get("addr")
+        latitude = request.POST.get("latitude")
+        longitude = request.POST.get("longitude")
         email = request.POST.get("email")
         phone = request.POST.get("phone-number")
         fssai = request.POST.get("fssai")
@@ -36,15 +37,15 @@ class RestSignUpView(View):
             messages.error(request, "Password and Confirm Password do not match")
             return redirect("restaurant_signup")
 
-        try:
-            geolocator = Nominatim(user_agent="savr")
-            address = name + ", " + location
-            loc = geolocator.geocode(address)
-            latitude = loc.latitude
-            longitude = loc.longitude
-        except:
-            messages.error(request, "Couldn't find your address")
-            return redirect("restaurant_signup")
+        # try:
+        #     geolocator = Nominatim(user_agent="savr")
+        #     address = name + ", " + location
+        #     loc = geolocator.geocode(address)
+        #     latitude = loc.latitude
+        #     longitude = loc.longitude
+        # except:
+        #     messages.error(request, "Couldn't find your address")
+        #     return redirect("restaurant_signup")
 
         rest = Restaurant(
             name=name,
@@ -72,7 +73,9 @@ class NGOSignUpView(View):
 
     def post(self, request):
         name = request.POST.get("ngo-name")
-        location = request.POST.get("address")
+        location = request.POST.get("addr")
+        latitude = request.POST.get("latitude")
+        longitude = request.POST.get("longitude")
         email = request.POST.get("email")
         ngoid = request.POST.get("reg-id")
         password1 = request.POST.get("password")
@@ -83,14 +86,14 @@ class NGOSignUpView(View):
         else:
             return HttpResponse("Error")
 
-        try:
-            geolocator = Nominatim(user_agent="savr")
-            loc = geolocator.geocode(location)
-            latitude = loc.latitude
-            longitude = loc.longitude
-        except:
-            messages.error(request, "Couldn't find your address")
-            return redirect("ngo_signup")
+        # try:
+        #     geolocator = Nominatim(user_agent="savr")
+        #     loc = geolocator.geocode(location)
+        #     latitude = loc.latitude
+        #     longitude = loc.longitude
+        # except:
+        #     messages.error(request, "Couldn't find your address")
+        #     return redirect("ngo_signup")
 
         ngo = NGO(
             name=name,
@@ -276,15 +279,41 @@ def DltFoodView(request, pk):
 
 
 class LeaderboardView(LoginRequiredMixin, View):
-    template="accounts/leaderboards.html"
+    template = "accounts/leaderboards.html"
 
     def get(self, request):
-        top_restaurants_monthly = Orders.objects.filter(status="Clcd", pickup_datetime__month=datetime.now().month).values('rest__name').annotate(total_qty=Sum('qty'))
-        top_ngos_monthly = Orders.objects.filter(status="Clcd", pickup_datetime__month=datetime.now().month).values('claimed_ngo__name').annotate(total_qty=Sum('qty'))
+        top_restaurants_monthly = (
+            Orders.objects.filter(
+                status="Clcd", pickup_datetime__month=datetime.now().month
+            )
+            .values("rest__name")
+            .annotate(total_qty=Sum("qty"))
+        )
+        top_ngos_monthly = (
+            Orders.objects.filter(
+                status="Clcd", pickup_datetime__month=datetime.now().month
+            )
+            .values("claimed_ngo__name")
+            .annotate(total_qty=Sum("qty"))
+        )
 
-        top_restaurants_all_time = Orders.objects.filter(status="Clcd").values('rest__name').annotate(total_qty=Sum('qty'))
-        top_ngos_all_time = Orders.objects.filter(status="Clcd").values('claimed_ngo__name').annotate(total_qty=Sum('qty'))
+        top_restaurants_all_time = (
+            Orders.objects.filter(status="Clcd")
+            .values("rest__name")
+            .annotate(total_qty=Sum("qty"))
+        )
+        top_ngos_all_time = (
+            Orders.objects.filter(status="Clcd")
+            .values("claimed_ngo__name")
+            .annotate(total_qty=Sum("qty"))
+        )
 
-        context={'current_month_name': datetime.now().strftime("%B"), 'top_restaurants_monthly': top_restaurants_monthly, 'top_ngos_monthly': top_ngos_monthly, 'top_restaurants_all_time': top_restaurants_all_time, 'top_ngos_all_time': top_ngos_all_time}
+        context = {
+            "current_month_name": datetime.now().strftime("%B"),
+            "top_restaurants_monthly": top_restaurants_monthly,
+            "top_ngos_monthly": top_ngos_monthly,
+            "top_restaurants_all_time": top_restaurants_all_time,
+            "top_ngos_all_time": top_ngos_all_time,
+        }
 
         return render(request, self.template, context)
