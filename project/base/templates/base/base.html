@@ -48,22 +48,22 @@
       font-weight: 800;
     }
 
-    .cursor {
-        border-radius: 9999px;
-        transform-origin: bottom;
-        animation: fluid-cursor-animation 2s ease-in-out infinite;
-      }
+  .cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    filter: url(#goo);
+    z-index: 9999;
+  }
 
-      @keyframes fluid-cursor-animation {
-        0%, 100% {
-          transform: scaleY(1) scaleX(1);
-          opacity: 1;
-        }
-        50% {
-          transform: scaleY(0.1) scaleX(3);
-          opacity: 0.5;
-        }
-      }
+  .cursor span {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #00f5d4;
+    transform: translate(-50%, -50%);
 
     @keyframes glitter {
       0% {
@@ -137,6 +137,27 @@
 </head>
 
 <body class="text-gray-800">
+
+  <div class="cursor">
+    <span id="main"></span>
+    <span id="follower"></span>
+  </div>
+
+
+  <svg>
+    <defs>
+      <filter id="goo">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
+        <feColorMatrix in="blur" mode="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 20 -10" result="goo"/>
+        <feBlend in="SourceGraphic" in2="goo"/>
+      </filter>
+    </defs>
+  </svg>
+
   <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
       {% if request.user.is_authenticated %}
@@ -276,6 +297,30 @@
   </footer>
 
   <script>
+
+    const cursor = document.querySelector(".cursor");
+  const main = document.getElementById("main");
+  const follower = document.getElementById("follower");
+
+  let mouseX = 0, mouseY = 0;
+  let followerX = 0, followerY = 0;
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animate() {
+    followerX += (mouseX - followerX) * 0.15;
+    followerY += (mouseY - followerY) * 0.15;
+
+    main.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    follower.style.transform = `translate(${followerX}px, ${followerY}px)`;
+
+    requestAnimationFrame(animate);
+  }
+  animate();
+
     document.addEventListener("DOMContentLoaded", function () {
       lucide.createIcons();
 
