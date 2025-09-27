@@ -321,20 +321,27 @@ body:hover .cursor-outline {
 
   <script>
 
-    const cursor = document.querySelector('.cursor');
-    let mouseX = 0, mouseY = 0;
+    const cursorDot = document.querySelector(".cursor-dot");
+const cursorOutline = document.querySelector(".cursor-outline");
 
-    document.addEventListener('mousemove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-    });
+// Track mouse movement
+window.addEventListener("mousemove", e => {
+  cursorDot.style.top = `${e.clientY}px`;
+  cursorDot.style.left = `${e.clientX}px`;
+  cursorOutline.style.top = `${e.clientY}px`;
+  cursorOutline.style.left = `${e.clientX}px`;
+});
 
-    // Expand cursor on clickable elements
-    document.querySelectorAll('button, a, input, textarea').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('active'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
-    });
+// Expand cursor on clickable items
+const targets = document.querySelectorAll("a, button, .project-card, .skill-item");
+targets.forEach(el => {
+  el.addEventListener("mouseenter", () => {
+    cursorOutline.classList.add("cursor-interact");
+  });
+  el.addEventListener("mouseleave", () => {
+    cursorOutline.classList.remove("cursor-interact");
+  });
+});
 
     document.addEventListener("DOMContentLoaded", function () {
       lucide.createIcons();
