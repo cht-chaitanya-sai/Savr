@@ -2,7 +2,7 @@
 
 <img width="1720" height="640" alt="Savr Banner" src="https://github.com/user-attachments/assets/ca541424-996a-4f55-8853-b9e9549b85ed" />
 
-# Savr 🍽️💚
+# Savr. 🍽️💚
 
 **Savr** (*pronounced Savour*) is a web platform designed to **bridge the gap between restaurants with surplus food and NGOs dedicated to feeding the hungry**.  
 
